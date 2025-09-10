@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     </PropertyGroup>
     <ItemGroup>
         <!-- ML & Data Processing -->
@@ -43,6 +43,7 @@
         <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.9" />
         
         <!-- Code Analysis -->
-        <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.1" />
+        <!-- <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" /> -->
+        <!-- .NET 9 SDK includes built-in analyzers -->
     </ItemGroup>
 </Project>

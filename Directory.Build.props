@@ -8,4 +8,15 @@
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     </PropertyGroup>
 
+    <!-- Global packages that need PrivateAssets=all for all projects -->
+    <!-- <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" PrivateAssets="all" />
+    </ItemGroup> -->
+    <!-- .NET 9 SDK includes built-in analyzers, so we don't need the explicit package reference -->
+
+    <!-- Global packages for test projects only -->
+    <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+        <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    </ItemGroup>
+
 </Project>
