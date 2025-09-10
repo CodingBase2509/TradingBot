@@ -10,32 +10,32 @@ Dieses Dokument beschreibt die **physische** Ordnerstruktur unter `src/` und `te
 
 ```
 /src
-  Trading.Core/
-  Trading.Features/
-  Trading.Labeling/
-  Trading.Policy/
-  Trading.Decision/
-  Trading.Exchanges.Binance/
-  Trading.Exchanges.Bitget/
-  Trading.Backtest.Adapter/
-  Trading.Persistence/
-  Trading.Telemetry/
-  Trading.Train/           # EXE
-  Trading.Backtest/        # EXE
-  Trading.Live/            # EXE
+  TradingBot.Core/
+  TradingBot.Features/
+  TradingBot.Labeling/
+  TradingBot.Policy/
+  TradingBot.Decision/
+  TradingBot.Exchanges.Binance/
+  TradingBot.Exchanges.Bitget/
+  TradingBot.Backtest.Adapter/
+  TradingBot.Persistence/
+  TradingBot.Telemetry/
+  TradingBot.Train/           # EXE
+  TradingBot.Backtest/        # EXE
+  TradingBot.Live/            # EXE
 
 /tests
-  Trading.Tests.Core/
-  Trading.Core.Tests/
-  Trading.Features.Tests/
-  Trading.Labeling.Tests/
-  Trading.Policy.Tests/
-  Trading.Decision.Tests/
-  Trading.Exchanges.Binance.Tests/
-  Trading.Persistence.Tests/
-  Trading.Backtest.Adapter.Tests/
-  Trading.Backtest.Tests/          # optional Integration/E2E
-  Trading.Live.Tests/              # optional Integration/Smoke
+  TradingBot.Tests.Core/
+  TradingBot.Core.Tests/
+  TradingBot.Features.Tests/
+  TradingBot.Labeling.Tests/
+  TradingBot.Policy.Tests/
+  TradingBot.Decision.Tests/
+  TradingBot.Exchanges.Binance.Tests/
+  TradingBot.Persistence.Tests/
+  TradingBot.Backtest.Adapter.Tests/
+  TradingBot.Backtest.Tests/          # optional Integration/E2E
+  TradingBot.Live.Tests/              # optional Integration/Smoke
 ```
 
 > **Hinweis:** Namen können angepasst werden. Wichtig ist die **Trennung** zwischen Domäne/Libs (unter `src/`) und Tests (unter `tests/`).
@@ -47,42 +47,42 @@ Dieses Dokument beschreibt die **physische** Ordnerstruktur unter `src/` und `te
 In Visual Studio/Rider per *Add → New Solution Folder* anlegen und Projekte hineinziehen:
 
 ```
-TradingBot.sln
+TradingBotBot.sln
 ├─ src/
 │  ├─ Core & Contracts
-│  │  └─ Trading.Core
+│  │  └─ TradingBot.Core
 │  ├─ ML
-│  │  ├─ Trading.Features
-│  │  ├─ Trading.Labeling
-│  │  └─ Trading.Policy
+│  │  ├─ TradingBot.Features
+│  │  ├─ TradingBot.Labeling
+│  │  └─ TradingBot.Policy
 │  ├─ Strategy
-│  │  └─ Trading.Decision
+│  │  └─ TradingBot.Decision
 │  ├─ Adapters
-│  │  ├─ Trading.Exchanges.Binance
-│  │  ├─ Trading.Exchanges.Bitget
-│  │  └─ Trading.Backtest.Adapter
+│  │  ├─ TradingBot.Exchanges.Binance
+│  │  ├─ TradingBot.Exchanges.Bitget
+│  │  └─ TradingBot.Backtest.Adapter
 │  ├─ Infrastructure
-│  │  ├─ Trading.Persistence
-│  │  └─ Trading.Telemetry
+│  │  ├─ TradingBot.Persistence
+│  │  └─ TradingBot.Telemetry
 │  └─ Apps
-│     ├─ Trading.Train
-│     ├─ Trading.Backtest
-│     └─ Trading.Live
+│     ├─ TradingBot.Train
+│     ├─ TradingBot.Backtest
+│     └─ TradingBot.Live
 └─ tests/
    ├─ Shared
-   │  └─ Trading.Tests.Core
+   │  └─ TradingBot.Tests.Core
    ├─ Unit
-   │  ├─ Trading.Core.Tests
-   │  ├─ Trading.Features.Tests
-   │  ├─ Trading.Labeling.Tests
-   │  ├─ Trading.Policy.Tests
-   │  ├─ Trading.Decision.Tests
-   │  ├─ Trading.Exchanges.Binance.Tests
-   │  └─ Trading.Persistence.Tests
+   │  ├─ TradingBot.Core.Tests
+   │  ├─ TradingBot.Features.Tests
+   │  ├─ TradingBot.Labeling.Tests
+   │  ├─ TradingBot.Policy.Tests
+   │  ├─ TradingBot.Decision.Tests
+   │  ├─ TradingBot.Exchanges.Binance.Tests
+   │  └─ TradingBot.Persistence.Tests
    └─ Integration
-      ├─ Trading.Backtest.Adapter.Tests
-      ├─ Trading.Backtest.Tests
-      └─ Trading.Live.Tests
+      ├─ TradingBot.Backtest.Adapter.Tests
+      ├─ TradingBot.Backtest.Tests
+      └─ TradingBot.Live.Tests
 ```
 
 ---
@@ -92,28 +92,28 @@ TradingBot.sln
 **Grundregel:** Abhängigkeiten gehen **nach unten** in die Domäne, nicht kreuz und quer.
 
 ```
-Trading.Core            ← wird von allen anderen referenziert
+TradingBot.Core            ← wird von allen anderen referenziert
 
-Trading.Features        → Trading.Core
-Trading.Labeling        → Trading.Core
-Trading.Policy          → Trading.Core
-Trading.Decision        → Trading.Core
+TradingBot.Features        → TradingBot.Core
+TradingBot.Labeling        → TradingBot.Core
+TradingBot.Policy          → TradingBot.Core
+TradingBot.Decision        → TradingBot.Core
 
-Trading.Exchanges.*     → Trading.Core
-Trading.Persistence     → Trading.Core
-Trading.Telemetry       → Trading.Core
+TradingBot.Exchanges.*     → TradingBot.Core
+TradingBot.Persistence     → TradingBot.Core
+TradingBot.Telemetry       → TradingBot.Core
 
-Trading.Backtest.Adapter→ Trading.Core, (optional) Trading.Decision, Trading.Policy, Trading.Features
+TradingBot.Backtest.Adapter→ TradingBot.Core, (optional) TradingBot.Decision, TradingBot.Policy, TradingBot.Features
 
-Trading.Train           → Trading.Core, Trading.Features, Trading.Labeling, Trading.Policy, Trading.Persistence, Trading.Telemetry
-Trading.Backtest        → Trading.Core, Trading.Backtest.Adapter, Trading.Decision, Trading.Policy, Trading.Features, Trading.Telemetry
-Trading.Live            → Trading.Core, Trading.Features, Trading.Policy, Trading.Decision, Trading.Exchanges.*, Trading.Persistence, Trading.Telemetry
+TradingBot.Train           → TradingBot.Core, TradingBot.Features, TradingBot.Labeling, TradingBot.Policy, TradingBot.Persistence, TradingBot.Telemetry
+TradingBot.Backtest        → TradingBot.Core, TradingBot.Backtest.Adapter, TradingBot.Decision, TradingBot.Policy, TradingBot.Features, TradingBot.Telemetry
+TradingBot.Live            → TradingBot.Core, TradingBot.Features, TradingBot.Policy, TradingBot.Decision, TradingBot.Exchanges.*, TradingBot.Persistence, TradingBot.Telemetry
 ```
 
 **Don’ts:**
-- `Trading.Decision` darf **nicht** `Trading.Exchanges.*` referenzieren.
-- `Trading.Policy` darf **nicht** `Trading.Persistence` referenzieren.
-- `Trading.Features` darf **nicht** `Trading.Train` referenzieren.
+- `TradingBot.Decision` darf **nicht** `TradingBot.Exchanges.*` referenzieren.
+- `TradingBot.Policy` darf **nicht** `TradingBot.Persistence` referenzieren.
+- `TradingBot.Features` darf **nicht** `TradingBot.Train` referenzieren.
 
 ---
 
@@ -180,7 +180,7 @@ indent_size = 2
 
 ---
 
-## 5) Gemeinsame Testbasis (`Trading.Tests.Core`)
+## 5) Gemeinsame Testbasis (`TradingBot.Tests.Core`)
 
 **Inhalte:**
 - `TestBase` mit gemeinsamen `Fixture`s (Clock, RNG, Config)
@@ -201,31 +201,31 @@ indent_size = 2
 ## 6) Solution-Referenzen (Beispiel `dotnet` CLI)
 
 ```bash
-dotnet new sln -n TradingBot
+dotnet new sln -n TradingBotBot
 # Libraries
-dotnet new classlib -n Trading.Core -o src/Trading.Core
-dotnet new classlib -n Trading.Features -o src/Trading.Features
-dotnet new classlib -n Trading.Labeling -o src/Trading.Labeling
-dotnet new classlib -n Trading.Policy -o src/Trading.Policy
-dotnet new classlib -n Trading.Decision -o src/Trading.Decision
-dotnet new classlib -n Trading.Exchanges.Binance -o src/Trading.Exchanges.Binance
-dotnet new classlib -n Trading.Exchanges.Bitget -o src/Trading.Exchanges.Bitget
-dotnet new classlib -n Trading.Backtest.Adapter -o src/Trading.Backtest.Adapter
-dotnet new classlib -n Trading.Persistence -o src/Trading.Persistence
-dotnet new classlib -n Trading.Telemetry -o src/Trading.Telemetry
+dotnet new classlib -n TradingBot.Core -o src/TradingBot.Core
+dotnet new classlib -n TradingBot.Features -o src/TradingBot.Features
+dotnet new classlib -n TradingBot.Labeling -o src/TradingBot.Labeling
+dotnet new classlib -n TradingBot.Policy -o src/TradingBot.Policy
+dotnet new classlib -n TradingBot.Decision -o src/TradingBot.Decision
+dotnet new classlib -n TradingBot.Exchanges.Binance -o src/TradingBot.Exchanges.Binance
+dotnet new classlib -n TradingBot.Exchanges.Bitget -o src/TradingBot.Exchanges.Bitget
+dotnet new classlib -n TradingBot.Backtest.Adapter -o src/TradingBot.Backtest.Adapter
+dotnet new classlib -n TradingBot.Persistence -o src/TradingBot.Persistence
+dotnet new classlib -n TradingBot.Telemetry -o src/TradingBot.Telemetry
 
 # Apps
-dotnet new console -n Trading.Train -o src/Trading.Train
-dotnet new console -n Trading.Backtest -o src/Trading.Backtest
-dotnet new worker  -n Trading.Live -o src/Trading.Live
+dotnet new console -n TradingBot.Train -o src/TradingBot.Train
+dotnet new console -n TradingBot.Backtest -o src/TradingBot.Backtest
+dotnet new worker  -n TradingBot.Live -o src/TradingBot.Live
 
 # Tests
-dotnet new xunit -n Trading.Tests.Core -o tests/Trading.Tests.Core
-dotnet new xunit -n Trading.Features.Tests -o tests/Trading.Features.Tests
+dotnet new xunit -n TradingBot.Tests.Core -o tests/TradingBot.Tests.Core
+dotnet new xunit -n TradingBot.Features.Tests -o tests/TradingBot.Features.Tests
 # ... (weitere)
 
 # Projekte zur Solution
-for p in src/*/*.csproj tests/*/*.csproj; do dotnet sln TradingBot.sln add "$p"; done
+for p in src/*/*.csproj tests/*/*.csproj; do dotnet sln TradingBotBot.sln add "$p"; done
 ```
 
 ---
@@ -233,7 +233,7 @@ for p in src/*/*.csproj tests/*/*.csproj; do dotnet sln TradingBot.sln add "$p";
 ## 7) Minimal-Interfaces (Kernelemente)
 
 ```csharp
-// src/Trading.Core
+// src/TradingBot.Core
 public record Candle(DateTimeOffset Ts, string Symbol, decimal Open, decimal High, decimal Low, decimal Close, decimal Volume, bool IsClosed);
 public record BookTick(DateTimeOffset Ts, string Symbol, decimal Bid, decimal Ask);
 
@@ -274,7 +274,7 @@ public interface IOrderService {
   "lookbackDays": 45,
   "model": { "path": "models/policy-2025-09-08/model.zip", "config": "models/policy-2025-09-08/config.json" },
   "risk": { "riskPct": 0.0075, "rrMinCosted": 1.5, "costRatioMax": 0.15 },
-  "db": { "conn": "Host=localhost;Username=bot;Password=secret;Database=trading" }
+  "db": { "conn": "Host=localhost;Username=bot;Password=secret;Database=TradingBot" }
 }
 ```
 

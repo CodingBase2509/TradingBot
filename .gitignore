@@ -1,5 +1,57 @@
-**/bin/
-**/obj/
-/packages/
-riderModule.iml
-/_ReSharper.Caches/
+# OS
+.DS_Store
+Thumbs.db
+
+# Rider / IntelliJ
+.idea/
+*.iml
+# VS
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.iml
+
+# VSCode
+.vscode/
+
+# .NET build
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+*.log
+TestResult*/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Packages/Restore cache (wenn lokal)
+packages/
+
+# User secrets / env
+*.secrets.json
+*.local.json
+.env
+
+# Generated data & models
+models/
+data/
+logs/
+artifacts/
+*.parquet
+*.arrow
+*.feather
+*.csv   # optional: falls du Rohdaten nicht einchecken willst
+
+# Docker
+**/.dockerignore
+docker/*.tar
+docker/*.img
+
+# Tools/Reports
+coverage/
+*.html
+*.svg
+*.png

@@ -1,0 +1,13 @@
+# build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+RUN dotnet publish src/Trading.Live/Trading.Live.csproj -c Release -o /out
+
+# run
+FROM mcr.microsoft.com/dotnet/runtime:9.0
+WORKDIR /app
+COPY --from=build /out .
+ENV DOTNET_GCServer=1 DOTNET_TieredPGO=1
+ENTRYPOINT ["dotnet", "Trading.Live.dll"]
