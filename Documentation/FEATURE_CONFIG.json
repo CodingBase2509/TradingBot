@@ -1,0 +1,56 @@
+{
+  "WindowDays": 45,
+  "Features": {
+    "Rsi": {
+      "Period": 14
+    },
+    "Atr": {
+      "Period": 14,
+      "Method": "RMA"
+    },
+    "Ema21": {
+      "Period": 21
+    },
+    "Ema50": {
+      "Period": 50
+    },
+    "Macd": {
+      "Fast": 12,
+      "Slow": 26,
+      "Signal": 9
+    },
+    "Bb": {
+      "Period": 20,
+      "Std": 2.0,
+      "Width": true
+    },
+    "Channel": {
+      "Period": 96,
+      "O1_regression": true,
+      "Emit": [
+        "slope",
+        "r2",
+        "pos01"
+      ]
+    },
+    "Vwap": {
+      "Anchored": false
+    },
+    "Sr": {
+      "ZigzagPct": 1.0,
+      "ClusterBins": 8,
+      "Emit": [
+        "distToSupportAtr",
+        "distToResistanceAtr",
+        "confluenceScore"
+      ]
+    },
+    "Costs": {
+      "Emit": [
+        "spreadAtr",
+        "feeBps",
+        "costRatio"
+      ]
+    }
+  }
+}
