@@ -4,5 +4,5 @@ dotnet_style_qualification_for_field = true:suggestion
 dotnet_diagnostic.CA2007.severity = warning
 end_of_line = lf
 indent_style = space
-indent_size = 2
+indent_size = 4
 
