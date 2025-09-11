@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7E7E8A2E-8E6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FB0377D7-403D-4B4E-B880-8F647FDB90E1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core & Contracts", "Core & Contracts", "{6D5880AB-18BB-42B2-BAD0-3C6363444658}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6D5880AB-18BB-42B2-BAD0-3C6363444658}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ML", "ML", "{A1B2C3D4-E5F6-7890-A1B2-C3D4E5F67890}"
 EndProject
@@ -51,7 +51,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Live", "src\Trading
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Tests.Core", "tests\Trading.Tests.Core\Trading.Tests.Core.csproj", "{6248ECE5-6B28-43EA-9C13-BF07BD76BBC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Core.Tests", "tests\Trading.Core.Tests\Trading.Core.Tests.csproj", "{32C5D0A2-6ED3-46FD-A16A-F5CBB5EDFA7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Foundation.Tests", "tests\Trading.Foundation.Tests\Trading.Foundation.Tests.csproj", "{32C5D0A2-6ED3-46FD-A16A-F5CBB5EDFA7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Features.Tests", "tests\Trading.Features.Tests\Trading.Features.Tests.csproj", "{AB7F5A27-6885-4CC4-9680-5119B3A2F2AC}"
 EndProject
@@ -70,6 +70,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Backtest.Tests", "tests\Trading.Backtest.Tests\Trading.Backtest.Tests.csproj", "{A8EA582C-AAFE-4D1F-B2CB-1B21248AC647}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Live.Tests", "tests\Trading.Live.Tests\Trading.Live.Tests.csproj", "{7CAD6C8C-3242-4AD5-A843-B2D96E2D7E22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trading.Foundation", "src\core\Trading.Foundation\Trading.Foundation.csproj", "{553FE8FE-E62F-4C55-8C65-CE24F1F85878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -369,6 +371,18 @@ Global
 		{7CAD6C8C-3242-4AD5-A843-B2D96E2D7E22}.Release|x64.Build.0 = Release|Any CPU
 		{7CAD6C8C-3242-4AD5-A843-B2D96E2D7E22}.Release|x86.ActiveCfg = Release|Any CPU
 		{7CAD6C8C-3242-4AD5-A843-B2D96E2D7E22}.Release|x86.Build.0 = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|x64.Build.0 = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Debug|x86.Build.0 = Debug|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|x64.ActiveCfg = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|x64.Build.0 = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|x86.ActiveCfg = Release|Any CPU
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -407,5 +421,6 @@ Global
 		{1A853F46-38ED-44DE-A7ED-1D2B63F54F85} = {B2C3D4E5-F6A1-4567-B2C3-D4E5F6A14567}
 		{A8EA582C-AAFE-4D1F-B2CB-1B21248AC647} = {B2C3D4E5-F6A1-4567-B2C3-D4E5F6A14567}
 		{7CAD6C8C-3242-4AD5-A843-B2D96E2D7E22} = {B2C3D4E5-F6A1-4567-B2C3-D4E5F6A14567}
+		{553FE8FE-E62F-4C55-8C65-CE24F1F85878} = {6D5880AB-18BB-42B2-BAD0-3C6363444658}
 	EndGlobalSection
 EndGlobal

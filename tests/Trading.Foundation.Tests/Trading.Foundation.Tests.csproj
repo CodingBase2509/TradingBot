@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>Trading.Core.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
