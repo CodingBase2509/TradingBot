@@ -6,14 +6,30 @@ Aus der Vision entsteht eine prüfbare, implementierbare Spezifikation.
 
 ## Umfang
 
-- V1-Produktgrenzen;
-- Handels- und Risikopolitik;
-- Lernziel und historische Bewertungsformel;
-- Datenbedarf und Qualitätsregeln;
-- Backtest- und Kostenannahmen;
-- Modellbewertung und Freigabeschwellen;
-- Anbieterentscheidungen;
-- Systemarchitektur und Modellvertrag.
+- [x] V1-Produktgrenzen;
+- [x] Handels- und Risikopolitik vollständig spezifizieren;
+- [x] Lernziel und historische Bewertungsformel;
+- [x] Datenbedarf und Qualitätsregeln;
+- [x] Backtest- und Kostenannahmen;
+- [x] Modellbewertung und Freigabeschwellen;
+- [ ] Anbieterentscheidungen;
+- [ ] Systemarchitektur und Modellvertrag.
+
+Die V1-Produktgrenzen und die Handels- und Risikopolitik sind mit ADR-005 und
+ADR-006 beschlossen. Parameter des technischen Designs bleiben konfigurierbar,
+ohne die fachliche Entscheidung erneut zu öffnen.
+
+Das V1-Lernziel, das Kandidatenraster und die historische Bewertungslogik sind
+mit ADR-007 beschlossen. Der konkrete Mindestvorteil gegenüber „kein Trade“
+wird als versionierter Modellparameter erst auf Validierungsdaten ausgewählt.
+
+Marktdatenauflösung, MES-Historie, Rollover, Lückentoleranz und das
+Backtest-Kostenmodell sind mit ADR-008 bis ADR-011 beschlossen. Konkrete
+Anbieterpreise und technisch kalibrierte Ausführungsparameter folgen in den
+dafür vorgesehenen Entscheidungsblöcken.
+
+Historische Mindestkriterien sowie Shadow- und Paper-Abnahme sind mit ADR-012
+beschlossen. Canary- und Live-Kriterien bleiben außerhalb des V1-Umfangs.
 
 ## Abnahme
 

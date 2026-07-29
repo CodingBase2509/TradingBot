@@ -11,10 +11,12 @@ Geplant ist keine einzelne, fest programmierte Trading-Strategie, sondern eine m
 Das Modell soll selbst wiederkehrende Marktmuster lernen und daraus Entscheidungen ableiten:
 
 - nicht handeln, Long oder Short;
-- gewünschtes Risiko beziehungsweise Positionsgröße;
 - Stop Loss (Verlustgrenze);
 - Take Profit (Gewinnziel);
-- maximale Haltedauer und später eventuell vorzeitiger Ausstieg.
+- geschätzte Haltedauer und später eventuell vorzeitiger Ausstieg.
+
+In V1 bestimmt die feste Risikopolitik die Positionsgröße. Eine vom Modell
+vorgeschlagene Risikofraktion ist eine spätere Erweiterung.
 
 Die .NET-Plattform bleibt die unveränderbare Sicherheitsebene. Sie darf jede Modellentscheidung begrenzen oder ablehnen. Neue Modelle gelangen nie unmittelbar nach dem Training in den Live-Betrieb, sondern durchlaufen historische Tests, Paper Trading und eine kontrollierte Freigabe.
 
@@ -69,6 +71,19 @@ Wahrheit für die Projektplanung.
 - [ADR-002 – ONNX](./decisions/ADR-002-ONNX.md)
 - [ADR-003 – Futures](./decisions/ADR-003-Futures-Target-Markets.md)
 - [ADR-004 – Interactive Brokers](./decisions/ADR-004-Interactive-Brokers.md)
+- [ADR-005 – V1-Produktumfang](./decisions/ADR-005-V1-Product-Scope.md)
+- [ADR-006 – Handels- und Risikopolitik](./decisions/ADR-006-V1-Trading-And-Risk-Policy.md)
+- [ADR-007 – V1-Lernziel](./decisions/ADR-007-V1-Learning-Objective.md)
+- [ADR-008 – V1-Marktdatenauflösung](./decisions/ADR-008-V1-Market-Data-Resolution.md)
+- [ADR-009 – MES-Historie und Rollover](./decisions/ADR-009-MES-History-And-Rollover.md)
+- [ADR-010 – Datenqualität und Lückentoleranz](./decisions/ADR-010-V1-Data-Quality-And-Gaps.md)
+- [ADR-011 – V1-Backtest-Kostenmodell](./decisions/ADR-011-V1-Backtest-Cost-Model.md)
+- [ADR-012 – V1-Modellevaluation](./decisions/ADR-012-V1-Model-Evaluation-And-Promotion.md)
+- [ADR-013 – Databento für historische Daten](./decisions/ADR-013-Databento-Historical-Data.md)
+- [ADR-014 – Datenimport, Aufbewahrung und Backup](./decisions/ADR-014-Data-Import-Retention-And-Backup.md)
+- [ADR-015 – Börsenkalender und Handelszeiten](./decisions/ADR-015-Exchange-Calendar.md)
+- [ADR-016 – Umgebungen und modularer Monolith](./decisions/ADR-016-Environments-And-Modular-Monolith.md)
+- [ADR-017 – Speicherarchitektur und Git-Versionierung](./decisions/ADR-017-Storage-And-Version-Control.md)
 
 ## Beschlossener Rahmen
 
@@ -76,18 +91,21 @@ Wahrheit für die Projektplanung.
 |---|---|
 | Ziel | Modulare, KI-gestützte Trading-Plattform |
 | Handelsstil | Day-Trading; noch kein extremes Scalping |
-| Haltedauer | typischerweise 30 Minuten bis 8 Stunden, toleriert bis ungefähr 24 Stunden |
+| Haltedauer | vom Modell geschätzt; spätestens Freitagsschließung |
 | Richtungen | Long und Short |
 | Langfristiger Zielmarkt | Futures |
-| Erster Paper-Trading-Markt | voraussichtlich Micro E-mini S&P 500 (MES) |
+| V1-Markt | ausschließlich Micro E-mini S&P 500 (MES) im Paper Trading |
 | Weitere Trainingsmärkte | MNQ, MGC und M6E als erste Kandidaten |
 | Live-Plattform | .NET |
 | Forschung und Training | Python |
 | Modellausführung | ONNX direkt in .NET |
 | Oberfläche | Angular |
+| Broker | Interactive Brokers für V1-Paper und bevorzugt für späteres Echtgeld |
+| Historische Daten | Databento vorläufig; vollständig TBBO + OHLCV-1m, MBP-1 nur als Stichprobe |
 | Sicherheitsgrenzen | fest in .NET, nicht vom Modell veränderbar |
 | Verbesserung | offline trainieren, vergleichen, stufenweise freigeben |
 | News | spätere Ausbaustufe |
+| Live-Handel | außerhalb des V1-Umfangs |
 
 „Voraussichtlich“ und „Kandidat“ bedeuten, dass die Entscheidung vor Beschaffung oder Implementierung noch geprüft werden muss.
 

@@ -53,4 +53,19 @@ Der dritte Test misst Übertragbarkeit, ersetzt aber keine marktspezifische Vali
 
 ## Promotion
 
-Konkrete Schwellen sind offen. Ein Kandidat muss mindestens nach Kosten profitabel, auf unbekannten Daten stabil, robust gegen verschlechterte Annahmen und im Paper Trading überzeugend sein. Wenige Glückstrades dürfen das Ergebnis nicht tragen.
+Für die V1 gelten mindestens:
+
+- 300 abgeschlossene Signalgruppen über mindestens 24 Monate unbekannter Daten;
+- mindestens fünf Walk-Forward-Fenster, davon vier mit positivem Nettoergebnis;
+- Profit Factor mindestens `1,20` nach vollständigen Basiskosten;
+- maximal `20 %` Drawdown;
+- bei zwei Ticks Slippage je Orderseite weiterhin profitabel;
+- bei drei Ticks Slippage Profit Factor mindestens `0,90` und Drawdown höchstens
+  das 1,5-Fache des Basiswerts;
+- keine einzelne Signalgruppe mit mehr als `10 %` des gesamten Nettogewinns;
+- kein Testfenster mit mehr als `40 %` der positiven Fensterergebnisse.
+
+Mehrere gleichgerichtete Trades zwischen erster Eröffnung und vollständiger
+Glattstellung zählen für die Mindestzahl als eine Signalgruppe. Ein Kandidat
+muss außerdem vier Wochen Shadow Mode sowie acht Wochen und 100 Signalgruppen
+im Paper Trading bestehen.

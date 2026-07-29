@@ -1,7 +1,7 @@
 # ADR-004: Interactive Brokers als bevorzugter Broker
 
-- **Status:** vorgeschlagen, vor Implementierung aktuell zu verifizieren
-- **Datum:** 27. Juli 2026
+- **Status:** beschlossen
+- **Datum:** 28. Juli 2026
 
 ## Kontext
 
@@ -9,7 +9,13 @@ Benötigt wird ein Broker mit breiter Marktabdeckung, Long/Short-Unterstützung,
 
 ## Entscheidung
 
-Interactive Brokers ist die bevorzugte Brokerwahl für Planung und ersten Adapter. Die endgültige Bestätigung erfolgt nach aktueller Prüfung von API, Gebühren, Marktdaten, Kontoberechtigungen und Paper-Verhalten.
+Interactive Brokers wird Broker für V1-Paper-Trading und ist der bevorzugte
+Broker für einen späteren Echtgeldbetrieb. Der erste Brokeradapter wird gegen
+die TWS-API beziehungsweise den IB Gateway entwickelt.
+
+Historische Trainingsdaten werden ausdrücklich von einem spezialisierten,
+separat auszuwählenden Datenanbieter bezogen. Interactive Brokers ist dafür
+nicht die maßgebliche Quelle.
 
 ## Begründung
 
@@ -24,3 +30,9 @@ Interactive Brokers ist die bevorzugte Brokerwahl für Planung und ersten Adapte
 - Marktdatenabonnements und deren Rechte werden separat geprüft.
 - Trainingsdaten stammen nicht ausschließlich vom Broker.
 - Der Brokeradapter verhindert, dass IBKR-spezifische Details in den fachlichen Kern gelangen.
+- Vor Implementierung werden Kontoeröffnung für einen deutschen Privatkunden,
+  MES-Handelsberechtigung, aktuelle Gebühren, Marktdatenabonnements,
+  Paper-Verhalten und API-Funktionen praktisch verifiziert.
+- Vor einem späteren Echtgeldbetrieb werden Ein- und Auszahlung,
+  Notfallzugriff, Kundengeldschutz und die dann geltenden Vertragsbedingungen
+  erneut geprüft.

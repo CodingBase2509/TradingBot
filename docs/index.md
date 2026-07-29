@@ -40,7 +40,7 @@ Für eine Einführung und Hinweise zur Nutzung der Dokumentation siehe
 1. [Trading-Konzept](./trading/TradingConcept.md)  
    Handelsstil, Modellentscheidungen, Ablauf und V1-Vereinfachungen.
 2. [Risiko- und Sicherheitskonzept](./trading/RiskManagement.md)  
-   Risk Guard, Schutzebenen, Handelsstopps und vorläufige Grenzwerte.
+   Risk Guard, Schutzebenen, Handelsstopps und beschlossene V1-Grenzwerte.
 3. [Markt- und Datenkonzept](./trading/MarketData.md)  
    Zielmärkte, Datenbedarf, Datenqualität und Futures-Rollover.
 4. [Orderausführung und Positionsverwaltung](./trading/Execution.md)  
@@ -83,7 +83,67 @@ eigenen Dokumente.
 3. [ADR-003 – Futures als Zielmärkte](./decisions/ADR-003-Futures-Target-Markets.md)  
    **Teilweise beschlossen:** Futures als Zielrichtung, konkrete V1-Auswahl vorgeschlagen.
 4. [ADR-004 – Interactive Brokers](./decisions/ADR-004-Interactive-Brokers.md)  
-   **Vorgeschlagen:** Bevorzugter Broker, vor Implementierung zu verifizieren.
+   **Beschlossen:** V1-Paper-Broker und bevorzugter späterer Echtgeldbroker.
+5. [ADR-005 – Produktumfang der V1](./decisions/ADR-005-V1-Product-Scope.md)
+   **Beschlossen:** MES, Paper Trading und begrenzter Funktionsumfang.
+6. [ADR-006 – Handels- und Risikopolitik der V1](./decisions/ADR-006-V1-Trading-And-Risk-Policy.md)
+   **Beschlossen:** Handelszeiten, Risikogrenzen, Sperren und Not-Aus.
+7. [ADR-007 – Lernziel und historische Handelsalternativen](./decisions/ADR-007-V1-Learning-Objective.md)
+   **Beschlossen:** Netto-`R`, Kandidatenraster und Mindest-Risk-to-Reward.
+8. [ADR-008 – Marktdatenauflösung der V1](./decisions/ADR-008-V1-Market-Data-Resolution.md)
+   **Beschlossen:** Ereignisnahe Rohdaten und kanonische Zeitsichten.
+9. [ADR-009 – MES-Historie und Rollover](./decisions/ADR-009-MES-History-And-Rollover.md)
+   **Beschlossen:** Historischer Zeitraum und volumenbasierter Vertragswechsel.
+10. [ADR-010 – Datenqualität und Lückentoleranz](./decisions/ADR-010-V1-Data-Quality-And-Gaps.md)
+    **Beschlossen:** Qualitätsstufen und sichere Behandlung fehlender Daten.
+11. [ADR-011 – Kostenmodell im V1-Backtest](./decisions/ADR-011-V1-Backtest-Cost-Model.md)
+    **Beschlossen:** Bid/Ask, Gebühren, Slippage und Ausführungsstress.
+12. [ADR-012 – Modellevaluation und Promotion](./decisions/ADR-012-V1-Model-Evaluation-And-Promotion.md)
+    **Beschlossen:** Historische, Shadow- und Paper-Mindestkriterien.
+13. [ADR-013 – Databento für historische Daten](./decisions/ADR-013-Databento-Historical-Data.md)
+    **Vorläufig beschlossen:** Anbieterwahl und gestufter Beschaffungsprozess.
+14. [ADR-014 – Datenimport, Aufbewahrung und Backup](./decisions/ADR-014-Data-Import-Retention-And-Backup.md)
+    **Beschlossen:** Manueller Import, Testumgebung und zwei getrennte Kopien.
+15. [ADR-015 – Börsenkalender und Handelszeiten](./decisions/ADR-015-Exchange-Calendar.md)
+    **Beschlossen:** CME als maßgebliche, versionierte Kalenderquelle.
+16. [ADR-016 – Umgebungen und modularer Monolith](./decisions/ADR-016-Environments-And-Modular-Monolith.md)
+    **Beschlossen:** Training, Test, Produktion und gemeinsamer Plattformkern.
+17. [ADR-017 – Speicherarchitektur und Git-Versionierung](./decisions/ADR-017-Storage-And-Version-Control.md)
+    **Beschlossen:** PostgreSQL, Parquet, Artefakte, Secrets und Git-Grenzen.
+18. [ADR-018 – Modellpaket und Laufzeitvertrag](./decisions/ADR-018-Model-Package-And-Runtime-Contract.md)
+    **Beschlossen:** Sichere Übergabe, Prüfung und Aktivierung von Python-Modellen in .NET.
+19. [ADR-019 – MLflow für Experiment Tracking](./decisions/ADR-019-MLflow-For-Experiment-Tracking.md)
+    **Beschlossen:** Forschungsverwaltung mit MLflow bei getrennter Plattformfreigabe.
+20. [ADR-020 – Datenstufen und Aufbewahrung](./decisions/ADR-020-Data-Stages-And-Retention.md)
+    **Beschlossen:** Originale, kanonische Daten, Trainingsstände und Artefakte getrennt verwalten.
+21. [ADR-021 – Schlanke physische Speicherstruktur](./decisions/ADR-021-Lean-Physical-Storage-Layout.md)
+    **Beschlossen:** Flache Verzeichnisse und bedarfsgerechte Speicherung reproduzierbarer Daten.
+22. [ADR-022 – Modulgrenzen des .NET-Plattformkerns](./decisions/ADR-022-DotNet-Module-Boundaries.md)
+    **Beschlossen:** Neun fachliche Module im gemeinsamen modularen Monolithen.
+23. [ADR-023 – Mehrere Strategy Instances](./decisions/ADR-023-Multi-Strategy-Runtime.md)
+    **Beschlossen:** Parallele Modelle mit gemeinsamen Konto-, Risiko- und Brokergrenzen.
+24. [ADR-024 – Trade-, Order- und Positionszustände](./decisions/ADR-024-Trade-Order-And-Position-State-Machines.md)
+    **Beschlossen:** Nachvollziehbare Zustandsmaschinen für Ausführung und Wiederherstellung.
+25. [ADR-025 – Atomare Konto-Risikoreservierung](./decisions/ADR-025-Atomic-Account-Risk-Reservations.md)
+    **Beschlossen:** Konsistente Reservierungen für parallele Strategy Instances.
+26. [ADR-026 – Operatives PostgreSQL-Datenmodell](./decisions/ADR-026-PostgreSQL-Operational-Data-Model.md)
+    **Beschlossen:** Fachschemas, UUID Version 7, C#-Enums, Projektionen und Ereignisse.
+27. [ADR-027 – Fehlerisolierung und Trainingsgrenze](./decisions/ADR-027-Failure-Containment-And-Training-Isolation.md)
+    **Beschlossen:** Gestufte Sperren und vollständig isolierte Python-Forschungsumgebung.
+28. [ADR-028 – Adaptiver Candidate Generator](./decisions/ADR-028-Adaptive-Candidate-Generator.md)
+    **Beschlossen:** Kausale Marktstrukturen, adaptive TP-/SL-Kandidaten und feste V1-Grenzen.
+29. [ADR-029 – Historische Trainingslabels](./decisions/ADR-029-V1-Training-Labels.md)
+    **Beschlossen:** Netto-R, Ausführungskosten, Haltedauer und Censoring der V1.
+30. [ADR-030 – Schlanke Python-Forschungsarchitektur](./decisions/ADR-030-Lean-Python-Research-Architecture.md)
+    **Beschlossen:** Ein Paket, fünf Bereiche, ein CLI und keine künstliche Infrastruktur.
+31. [ADR-031 – Schlanke .NET-Plattformstruktur](./decisions/ADR-031-Lean-DotNet-Platform-Structure.md)
+    **Beschlossen:** Ein Host, wenige Projekte und fachliche Modulgrenzen ohne Frameworkballast.
+32. [ADR-032 – Einfacher und vollständiger Code](./decisions/ADR-032-Simple-And-Complete-Code.md)
+    **Beschlossen:** Verständliche Python- und C#-Implementierungen ohne Funktionsverlust.
+33. [ADR-033 – Modellpaket-Schemas und Parität](./decisions/ADR-033-Model-Package-Schemas-And-Parity.md)
+    **Beschlossen:** Fünf Paketdateien, 500 Referenzfälle und fachlich exakte Python-/NET-Prüfung.
+34. [ADR-034 – Deploymentzonen und manuelle Modellpromotion](./decisions/ADR-034-Deployment-Zones-And-Manual-Model-Promotion.md)
+    **Beschlossen:** Zwei Images, isolierte Zonen und bewusste Paketpromotion über die UI.
 
 ## Empfohlene Lesereihenfolge
 

@@ -22,7 +22,8 @@ Das Modell ist ein austauschbares Modul. Die Trading-Plattform muss auch mit ein
 
 - robuste Muster über mehrere Marktarten und Marktphasen lernen;
 - Long-, Short- und Kein-Trade-Entscheidungen treffen;
-- gewünschtes Risiko, Stop Loss, Take Profit und Haltedauer vorschlagen;
+- langfristig gewünschtes Risiko sowie Stop Loss, Take Profit und Haltedauer
+  vorschlagen; in V1 bleibt das Risikobudget fest vorgegeben;
 - alle Ergebnisse nach Kosten und Risiko bewerten;
 - neue Modellkandidaten kontrolliert trainieren, prüfen und freigeben;
 - zunächst Paper Trading, später begrenzter Live-Betrieb;
@@ -34,16 +35,16 @@ Das Modell ist ein austauschbares Modul. Die Trading-Plattform muss auch mit ein
 | Bereich | Aktueller Stand |
 |---|---|
 | Handelsstil | Day-Trading, kein extremes Scalping |
-| Haltedauer | typisch 30 Minuten bis 8 Stunden, maximal ungefähr 24 Stunden |
+| Haltedauer | vom Modell geschätzt; spätestens Freitagsschließung |
 | Richtung | Long und Short |
 | Zielmarkt | Futures |
-| erster Markt | MES als vorgeschlagener Paper-Markt |
+| erster Markt | V1: ausschließlich MES im Paper Trading |
 | weitere Kandidaten | MNQ, MGC und M6E |
 | Produktion | .NET |
 | Training und Forschung | Python |
 | Modellausführung | ONNX in .NET |
 | Bedienung | Angular |
-| Broker | Interactive Brokers als vorgeschlagene Wahl |
+| Broker | V1: Interactive Brokers Paper, vorbehaltlich technischer Verifikation |
 | Sicherheit | feste, nicht vom Modell veränderbare Grenzen in .NET |
 
 ## Nicht-Ziele der ersten Version
@@ -51,6 +52,7 @@ Das Modell ist ein austauschbares Modul. Die Trading-Plattform muss auch mit ein
 - garantierte Profitabilität;
 - Millisekunden- oder Hochfrequenzhandel;
 - sofortiger Einsatz echten Kapitals;
+- Live-Handel innerhalb der V1;
 - Umlernen nach jedem einzelnen Trade;
 - Reinforcement Learning als Startpunkt;
 - ungeprüft vom Modell erzeugter Programmcode;

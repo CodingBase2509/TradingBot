@@ -15,11 +15,15 @@ Die Phasen sind durch Ergebnisse und Abnahmekriterien definiert, nicht durch fes
 
 ## Phase 3 – Paper und Modelllebenszyklus
 
-Automatische Prüfberichte, Model Manager, Champion/Challenger, Shadow, Paper, Freigabe, Rollback und Vergleich zwischen Backtest und Live-Daten.
+Automatische Prüfberichte, Model Manager, Champion/Challenger, parallele
+Strategy Instances in Shadow und Simulated Paper, kontrolliertes Broker Paper,
+Freigabe, Rollback und Vergleich zwischen Backtest und Live-Daten.
 
 ## Phase 4 – Marktübergreifendes Lernen
 
-Weitere Futures, gemeinsame Normalisierung, zurückgehaltene Märkte, marktbezogene Anpassung sowie Korrelations- und Portfoliorisiko.
+Weitere Futures, marktbezogene Strategy Instances, gemeinsame Normalisierung,
+zurückgehaltene Märkte, marktbezogene Anpassung sowie Korrelations- und
+Portfoliorisiko über ein gemeinsames Brokerkonto.
 
 ## Phase 5 – Kontrollierter Live-Pilot
 

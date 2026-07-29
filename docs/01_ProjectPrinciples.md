@@ -15,3 +15,5 @@
 13. **Anbieterunabhängigkeit:** Kein fachlicher Kern hängt unnötig von Broker oder Datenanbieter ab.
 14. **Modell und Sicherung bleiben getrennt:** Das Modell optimiert Handelsentscheidungen; .NET prüft technische und finanzielle Zulässigkeit.
 15. **Beschlüsse sind sichtbar:** Vorschläge, Arbeitswerte, Beschlüsse und verworfene Optionen werden eindeutig gekennzeichnet.
+16. **Keine künstliche Komplexität:** Neue Komponenten, Abstraktionen und Infrastruktur benötigen einen realen zweiten Anwendungsfall, eine Sicherheitsgrenze oder einen gemessenen Nutzen.
+17. **Einfacher, vollständiger Code:** Python und C# verwenden die kleinste verständliche Implementierung, die benötigte Funktionalität, Sicherheit, Fehlerbehandlung und Tests vollständig erhält.

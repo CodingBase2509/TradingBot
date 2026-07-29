@@ -1,47 +1,32 @@
 # Offene Entscheidungen
 
-## Priorität A – vor dem Detaildesign
-
-- V1 ausschließlich auf MES begrenzen?
-- genaue minimale, typische und maximale Haltedauer;
-- Stop und Ziel nach Einstieg unveränderlich oder begrenzt anpassbar;
-- Positionen über Handelsschluss oder Wochenende;
-- genaue Formel für historische Lernvorlagen;
-- gemeinsame Ausgabe oder mehrere Teilmodelle;
-- Mindestvorteil gegenüber „kein Trade“;
-- Mindestzahl unabhängiger Trades und zulässiger Drawdown;
-- Dauer und Abnahmekriterien von Shadow, Paper und Canary;
-- konkrete Risiko-, Tagesverlust- und Gesamtexposure-Grenzen.
-
 ## Priorität B – Daten und Anbieter
 
-- Databento und Alternativen nach Tiefe, Bid/Ask, Lizenz und Preis vergleichen;
-- benötigte Grundauflösung festlegen;
-- Rollover-Methode für kontinuierliche Analyse-Reihen;
-- Handelszeiten und relevante Sitzungen;
-- Datenbudget, Aufbewahrung und Backup;
+- Databento-Testbestand prüfen und Anbieter endgültig bestätigen;
 - Broker-Marktdaten gegen unabhängige Daten validieren.
+
+Für das technische Design bleibt eine konservative Rollover-Ersatzregel bei
+fehlenden oder fehlerhaften Volumendaten festzulegen.
 
 ## Priorität C – Technik und Betrieb
 
-- modularer Monolith verbindlich bestätigen;
-- relationale Datenbank, Parquet- und Objektablage auswählen;
-- MLflow oder schlanke eigene Experimentverwaltung;
-- Artefaktübergabe von Python an .NET;
-- Hosting, IB Gateway, Zeitabgleich und Geheimnisverwaltung;
-- exakter Modell-Ein- und Ausgabevertrag;
-- Notfallverhalten je Ausfallart.
+- konkreter Cloudanbieter, Container Runtime und IB-Gateway-Betriebsdetails;
+- praktische Bestätigung der beschlossenen Modellpaket-Toleranzen am ersten
+  echten Modell;
+- praktische Kalibrierung der beschlossenen P50-/P90-Haltedauerschätzung;
+- konkrete Health-Checks, Retryfristen und Eskalationsschwellen je Komponente;
+- konkrete Hostpfade, Dateirechte und Environment-Secret-Dateien;
+- konkrete PostgreSQL-Spalten, Indizes und Constraints je
+  Implementierungsphase sowie Messung und Feinabstimmung der beschlossenen
+  Parquet-Dateiaufteilung;
+- technische Umsetzung der beschlossenen Aufbewahrung;
+- Backupfrequenzen und Wiederherstellungsziele je Zone.
 
 ## Empfohlene Entscheidungsreihenfolge
 
-1. V1-Produktumfang.
-2. Handels- und Risikopolitik.
-3. Lernziel und Bewertungsformel.
-4. Datenbedarf und Backtestannahmen.
-5. Modellfreigabekriterien.
-6. Anbieterwahl.
-7. technische Architektur und Schnittstellen.
-8. Datenmodelle und Umsetzung.
+1. Databento-Test und Brokerdatenvergleich praktisch durchführen.
+2. technische Architektur und Schnittstellen festlegen.
+3. Datenmodelle und Umsetzung planen.
 
 ## Entscheidungsformat
 

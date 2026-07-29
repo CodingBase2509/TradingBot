@@ -2,6 +2,10 @@
 
 Backtesting simuliert Entscheidungen auf historischen Daten, als wäre die Zukunft unbekannt.
 
+Für Ausführung und Stop-/TP-Reihenfolge werden ereignisnahe Trade- und
+Bid-/Ask-Daten bevorzugt. Die Modellentscheidung verwendet davon getrennte,
+abgeschlossene 1-, 5-, 15- und 60-Minuten-Sichten.
+
 ## Gemeinsamer Kern
 
 Backtest, Paper und Live sollen dieselbe Order-, Positions- und Risikologik verwenden. Ausgetauscht werden Datenzufuhr und Brokeradapter.
@@ -15,21 +19,40 @@ Backtest, Paper und Live sollen dieselbe Order-, Positions- und Risikologik verw
 - Teilfüllungen;
 - Tick-Größe und Mindestmenge;
 - Liquiditätsgrenzen;
-- Stop Loss, Take Profit und maximale Haltedauer;
+- Stop Loss, Take Profit und Haltedauerschätzung;
 - Handelszeiten;
+- tägliche Börsenpausen, verkürzte Handelstage und Feiertage;
+- Kurslücken, in denen Schutzorders erst nach Wiedereröffnung ausführbar sind;
+- Einstiegsschluss und verpflichtende Freitagsschließung;
 - Futures-Rollover und tatsächlich handelbarer Vertrag.
+
+Long-Einstiege verwenden die erreichbare Ask-Seite, Short-Einstiege die
+Bid-Seite. Das Basisszenario nimmt zusätzlich mindestens einen Tick Slippage je
+Orderseite an; Robustheitstests verwenden mindestens zwei und drei Ticks.
+Gebühren werden pro Kontrakt und Orderseite mit einer zeitabhängigen,
+versionierten Konfiguration berücksichtigt.
+
+Limit- und Stop-Orders gelten nicht allein aufgrund einer Kerzenberührung
+automatisch zum gewünschten Preis als ausgeführt. Ausführungsreihenfolge,
+verfügbare Ereignisdaten, Teilfüllung und Verzögerung werden berücksichtigt.
 
 ## Historische Lernvorlagen
 
-Pro geeignetem Zeitpunkt werden kein Trade sowie Long und Short mit mehreren Stop-, Ziel- und Haltedauer-Kombinationen simuliert.
+Pro geeignetem Zeitpunkt werden kein Trade sowie Long und Short mit mehreren
+adaptiv aus der vorherigen Marktstruktur erzeugten Stop-/Zielkombinationen
+simuliert. Zusätzlich werden aktive Marktzeit, normale vergangene Zeit und
+Schließungsgrund als Grundlage der Haltedauerschätzung erzeugt.
 
-Frühes Arbeitsraster:
+Historischer und laufender Candidate Generator verwenden dieselbe versionierte
+ADR-028-Logik. Ein historischer Swing darf erst ab seiner damaligen
+Bestätigung verfügbar sein.
 
-- Stop: 0,5 / 1,0 / 1,5 / 2,0 × aktuelle Schwankung;
-- Ziel: 1,0 / 1,5 / 2,0 / 3,0 × aktuelle Schwankung;
-- Haltedauer: 30 / 60 / 120 / 240 / 480 Minuten.
+Historische Kandidaten werden gemäß ADR-029 mit ausführbarer Marktseite,
+Kosten, Netto-`R`, aktiver Haltedauer und Censoring gelabelt.
 
-Diese Werte sind Vorschläge und werden vor Implementierung mathematisch geprüft.
+Kombinationen werden nur berücksichtigt, wenn ihr erwarteter Nettogewinn am
+Take Profit mindestens so groß ist wie ihr erwarteter Nettoverlust am Stop Loss.
+Gebühren, Spread, Slippage und Tick-Rundung fließen in dieses Verhältnis ein.
 
 ## Konservative Regeln
 
@@ -37,6 +60,8 @@ Diese Werte sind Vorschläge und werden vor Implementierung mathematisch geprüf
 - Rohdaten bleiben unverändert.
 - Unbekannte spätere Daten dürfen weder Feature noch Modellwahl beeinflussen.
 - Ein Trade muss „kein Trade“ nach Kosten und Risikostrafe deutlich schlagen.
+- Historische Ergebnisse werden als Netto-`R` ausgedrückt; `1 R` entspricht dem
+  geplanten Verlust am Stop einschließlich angenommener Kosten.
 
 ## Robustheitstests
 
