@@ -1,13 +1,34 @@
-# Trading Intelligence Platform – Inhaltsverzeichnis
+# Trading-KI-Plattform – Inhaltsverzeichnis
 
-Zentraler Einstieg in die Projektdokumentation der Trading-KI-Plattform.
+Vollständige Navigation durch die Projektdokumentation.
 
-**Stand:** 27. Juli 2026  
+**Stand:** 3. August 2026
 **Aktuelle Phase:** Phase 0 – Planung und fachliche Spezifikation  
 **Implementierungsstatus:** Noch keine produktive Implementierung
 
-Für eine Einführung und Hinweise zur Nutzung der Dokumentation siehe
-[Dokumentationsübersicht](./README.md).
+Eine kurze Einführung in das Projekt bietet die
+[Startseite der Dokumentation](./README.md).
+
+## Aufbau und Verbindlichkeit
+
+Die Fach-, Architektur-, Trading- und ML-Dokumente beschreiben den aktuellen
+verbindlichen Planungsstand. Die Roadmap ordnet die Umsetzung zeitlich und nach
+Ergebnissen. [Offene Entscheidungen](./05_OpenDecisions.md) kennzeichnet
+Punkte, die noch nicht abschließend festgelegt wurden.
+
+Architekturentscheidungen (ADRs) dokumentieren knapp, warum eine grundlegende
+Entscheidung getroffen wurde und welche Folgen sie hatte. Die vollständige
+aktuelle Regel steht im jeweils verlinkten Fachdokument. ADRs werden bei
+späteren Änderungen nicht gelöscht oder neu nummeriert; ihr Status wird
+angepasst oder eine neue ADR ergänzt.
+
+Damit konkrete Regeln nicht widersprüchlich doppelt gepflegt werden, gilt:
+
+```text
+Fachdokumente = aktueller verbindlicher Stand
+ADRs          = Entscheidungsverlauf und Begründung
+Roadmap       = Reihenfolge und Abnahme der Umsetzung
+```
 
 ## Grundlagen
 
@@ -32,7 +53,9 @@ Für eine Einführung und Hinweise zur Nutzung der Dokumentation siehe
    Verantwortlichkeiten der .NET-, Python- und Angular-Komponenten.
 3. [Kommunikation](./architecture/Communication.md)  
    Schnittstellen, Kommunikationswege und Modellvertrag.
-4. [Deployment und Betrieb](./architecture/Deployment.md)  
+4. [Speicher und Datenhaltung](./architecture/Storage.md)
+   Speicherarten, Datenstufen, Git-Grenzen und Aufbewahrung.
+5. [Deployment und Betrieb](./architecture/Deployment.md)
    Geplantes Startbild, Betriebsgrundsätze und Ausfallverhalten.
 
 ## Trading
@@ -81,7 +104,7 @@ eigenen Dokumente.
 2. [ADR-002 – ONNX als bevorzugtes Modellformat](./decisions/ADR-002-ONNX.md)  
    **Beschlossen mit Vorbehalt:** Modellausführung direkt in .NET.
 3. [ADR-003 – Futures als Zielmärkte](./decisions/ADR-003-Futures-Target-Markets.md)  
-   **Teilweise beschlossen:** Futures als Zielrichtung, konkrete V1-Auswahl vorgeschlagen.
+   **Beschlossen:** Futures als Zielrichtung und MES als V1-Markt.
 4. [ADR-004 – Interactive Brokers](./decisions/ADR-004-Interactive-Brokers.md)  
    **Beschlossen:** V1-Paper-Broker und bevorzugter späterer Echtgeldbroker.
 5. [ADR-005 – Produktumfang der V1](./decisions/ADR-005-V1-Product-Scope.md)
@@ -89,7 +112,7 @@ eigenen Dokumente.
 6. [ADR-006 – Handels- und Risikopolitik der V1](./decisions/ADR-006-V1-Trading-And-Risk-Policy.md)
    **Beschlossen:** Handelszeiten, Risikogrenzen, Sperren und Not-Aus.
 7. [ADR-007 – Lernziel und historische Handelsalternativen](./decisions/ADR-007-V1-Learning-Objective.md)
-   **Beschlossen:** Netto-`R`, Kandidatenraster und Mindest-Risk-to-Reward.
+   **Beschlossen:** Netto-`R`, adaptive Kandidaten und Mindest-Risk-to-Reward.
 8. [ADR-008 – Marktdatenauflösung der V1](./decisions/ADR-008-V1-Market-Data-Resolution.md)
    **Beschlossen:** Ereignisnahe Rohdaten und kanonische Zeitsichten.
 9. [ADR-009 – MES-Historie und Rollover](./decisions/ADR-009-MES-History-And-Rollover.md)
@@ -161,4 +184,14 @@ Projektvision
 ```
 
 Bei Detailarbeiten sollte zusätzlich immer das zugehörige Fachdokument sowie die
-betroffenen Architekturentscheidungen berücksichtigt werden.
+zugehörige ADR für den Entscheidungskontext berücksichtigt werden.
+
+## Pflege der Dokumentation
+
+- Neue oder geänderte Regeln werden zuerst in das zuständige Fachdokument
+  übernommen.
+- Grundlegende Architektur- oder Technologieentscheidungen erhalten zusätzlich
+  eine neue oder aktualisierte ADR.
+- Vorschläge werden ausdrücklich als offen oder vorläufig gekennzeichnet.
+- Erledigte Planungspunkte werden in der Roadmap aktualisiert.
+- Neue Seiten und ADRs werden in diesem Inhaltsverzeichnis ergänzt.

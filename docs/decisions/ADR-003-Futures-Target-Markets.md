@@ -1,6 +1,6 @@
 # ADR-003: Futures als langfristiger Zielmarkt
 
-- **Status:** Zielrichtung beschlossen; konkrete V1-Auswahl vorgeschlagen
+- **Status:** beschlossen
 - **Datum:** 27. Juli 2026
 
 ## Kontext
@@ -9,7 +9,8 @@ Gesucht wird ein vielseitiger Markt für Long- und Short-Day-Trading und später
 
 ## Entscheidung
 
-Futures bilden den langfristigen Zielmarkt. Als erste Trainingskandidaten gelten MES, MNQ, MGC und M6E. MES ist der bevorzugte erste Paper-Markt.
+Futures bilden den langfristigen Zielmarkt. MES ist der verbindliche erste
+V1-Paper-Markt. MNQ, MGC und M6E bleiben spätere Kandidaten.
 
 ## Begründung
 

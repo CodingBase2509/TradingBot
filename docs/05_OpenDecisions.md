@@ -24,9 +24,11 @@ fehlenden oder fehlerhaften Volumendaten festzulegen.
 
 ## Empfohlene Entscheidungsreihenfolge
 
-1. Databento-Test und Brokerdatenvergleich praktisch durchführen.
-2. technische Architektur und Schnittstellen festlegen.
-3. Datenmodelle und Umsetzung planen.
+1. V1-End-to-End-Abnahmeszenarien festlegen.
+2. minimalen Technologie- und Konfigurationsvertrag festlegen.
+3. Rollover-Ersatzregel festlegen.
+4. Danach Phase 1 implementieren und Databento sowie Brokerdaten parallel
+   praktisch validieren.
 
 ## Entscheidungsformat
 

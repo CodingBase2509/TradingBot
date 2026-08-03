@@ -27,10 +27,40 @@ Entscheidung → Vorprüfung → Order gesendet → bestätigt
 
 Jeder Übergang wird als Ereignis protokolliert. Unerwartete oder unmögliche Übergänge blockieren neue Trades.
 
-Decision, Trade, Order und Position besitzen getrennte Zustandsmaschinen. Die
-vollständigen Zustände, Teilfüllungsregeln, Idempotenz und Wiederherstellung
-regelt
-[ADR-024](../decisions/ADR-024-Trade-Order-And-Position-State-Machines.md).
+Decision, Trade, Order und Position besitzen getrennte Zustandsmaschinen.
+Teilfüllungen verändern Order, logischen Trade, Schutzmenge und Brokerposition
+in nachvollziehbaren idempotenten Schritten. Nach einem Neustart bleiben neue
+Trades blockiert, bis alle offenen Orders, Fills, Positionen und Schutzorders
+mit Broker oder Simulation abgeglichen wurden.
+
+Der fachliche Trade verwendet mindestens folgende stabilen Enumzustände:
+
+```text
+IntentCreated
+├─ Rejected
+└─ RiskApproved
+   └─ EntryPending
+      ├─ Cancelled
+      ├─ Failed
+      ├─ EntryPartial
+      └─ Protecting
+         ├─ ActiveProtected
+         │  └─ ExitPending
+         │     ├─ PartiallyClosed
+         │     └─ Closed
+         │        └─ Reconciled
+         └─ EmergencyClosing
+            ├─ Closed
+            └─ EmergencyFailed
+```
+
+Orders verwenden mindestens `Created`, `Submitted`, `Acknowledged`,
+`PartiallyFilled`, `Filled`, `CancelRequested`, `Cancelled`, `Rejected`,
+`Expired` und `Unknown`. `CancelRequested` bedeutet ausdrücklich noch nicht
+`Cancelled`. `Closed` bedeutet intern erwartete Menge null; erst `Reconciled`
+bestätigt eine leere Strategy-Allokation, passende Broker-Nettoposition, keine
+verwaisten Orders und vollständig gespeicherte Ausführungen, Kosten und
+Schließungsgründe.
 
 Die normale Benutzersicht fasst die technischen Zustände als geplant,
 freigegeben, Einstieg läuft, eröffnet und geschützt, Schließung läuft sowie

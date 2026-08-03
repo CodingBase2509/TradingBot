@@ -15,24 +15,38 @@
 | Operations & Audit | Systemzustand, Not-Aus, Monitoring, Audit und API-Status |
 
 Backtest, Shadow und Paper verwenden diese Module gemeinsam. Austauschbar sind
-nur Uhr, Marktdatenquelle und Ausführungsadapter. Die vollständigen Grenzen und
-Kommunikationsregeln stehen in
-[ADR-022](../decisions/ADR-022-DotNet-Module-Boundaries.md).
+nur Uhr, Marktdatenquelle und Ausführungsadapter. Fachliche Abhängigkeiten
+laufen vom Markt über Entscheidung und Risiko zur Ausführung; Broker- und
+Speicherdetails bleiben an den jeweiligen Randadaptern.
 
 Feature & Intelligence sowie Decision werden je Strategy Instance betrieben.
 Marktdaten, Account Risk, Execution Router, Brokeradapter, Reconciliation,
 Model Management und Operations besitzen gemeinsame Plattform- oder
-Kontosichten. Details regelt
-[ADR-023](../decisions/ADR-023-Multi-Strategy-Runtime.md).
+Kontosichten.
+
+Jede Strategy Instance besitzt eine unveränderliche ID und versionierte
+Konfiguration für Instrument, Zeitrahmen, Datenquelle, Feature- und
+Candidate-Version, Modellpaket, Schwelle, Modus und Risikoprofil. Eine Änderung
+erzeugt eine neue Konfigurationsversion und einen Audit-Eintrag.
+
+Ausführungsmodi sind `Backtest`, `Shadow`, `SimulatedPaper`, `BrokerPaper` und
+später `Live`. Shadow sendet keine Orders. Simulated Paper verwendet virtuelle
+Konten. Broker Paper und Live teilen die konto-, risiko- und
+nettopositionsbezogene Sicht. V1 erlaubt je Instrument nur eine
+Broker-Paper-Ausführungsgruppe.
 
 Trade Management, Execution und Reconciliation verwenden getrennte Trade-,
-Order- und Positionszustände gemäß
-[ADR-024](../decisions/ADR-024-Trade-Order-And-Position-State-Machines.md).
+Order- und Positionszustände. Ein Trade durchläuft Planung, Risikofreigabe,
+Einstieg, Schutz, aktive Verwaltung, Schließung und abschließenden Abgleich.
+Orders besitzen davon unabhängig Brokerzustände wie erstellt, gesendet,
+bestätigt, teilweise oder vollständig ausgeführt, storniert und abgelehnt.
+Positionen werden aus bestätigten Ausführungen berechnet und mit der
+Broker-Nettoposition abgeglichen. Unbekannte oder unmögliche Übergänge blockieren
+den kleinsten sicheren Bereich.
 
 Die neun Module werden in V1 als Ordner und Namespaces eines ausführbaren
 .NET-Plattformprojekts umgesetzt. Sie sind keine neun Dienste oder
-zwangsläufig neun Assemblies. Die physische Minimalstruktur regelt
-[ADR-031](../decisions/ADR-031-Lean-DotNet-Platform-Structure.md).
+zwangsläufig neun Assemblies.
 
 ## Python-Forschung
 
@@ -45,8 +59,11 @@ zwangsläufig neun Assemblies. Die physische Minimalstruktur regelt
 | Jobs | bekannte reproduzierbare CLI-Abläufe |
 
 Diese Bereiche bilden ein einziges installierbares Python-Paket und keine
-eigenständigen Dienste. Details regelt
-[ADR-030](../decisions/ADR-030-Lean-Python-Research-Architecture.md).
+eigenständigen Dienste. Offizielle Abläufe werden über eine kleine CLI mit
+bekannten Befehlen gestartet. Eine versionierte Laufkonfiguration wird früh
+validiert. Notebooks dürfen erkunden und visualisieren, enthalten aber nie die
+einzige offizielle Logik. Nur notwendige Ergebnisse werden dauerhaft
+gespeichert.
 
 ## Angular
 
@@ -103,3 +120,22 @@ Die Plattformbereiche werden in die fachlichen Schemas `market`, `strategy`,
 `model`, `risk`, `trading`, `execution` und `operations` gegliedert. IDs
 verwenden UUID Version 7; Zustände und Ereignistypen werden im C#-Fachcode als
 stabile Enums modelliert.
+
+Die verbindliche Speicherzuordnung und Aufbewahrung beschreibt
+[Speicher und Datenhaltung](./Storage.md).
+
+## Physische Codegrenzen
+
+V1 startet mit einer .NET-Solution, einem ausführbaren Plattformprojekt und
+einem kompakten Testprojekt. Infrastruktur wird nah an ihrer fachlichen Grenze
+gehalten; EF Core wird ohne generische Repository- oder Unit-of-Work-Hülle
+verwendet. Python startet als ein installierbares Paket mit den fünf genannten
+Bereichen.
+
+Weitere Services, Assemblies, Frameworkschichten und allgemeine Abstraktionen
+entstehen nur für einen realen zweiten Anwendungsfall, eine notwendige
+Sicherheitsgrenze oder einen gemessenen Nutzen. Für beide Sprachen gelten
+fachlich benannte, möglichst lineare Abläufe, frühe Validierung, sichtbare
+Fehler und Tests des beobachtbaren Verhaltens. Einfachheit darf Risiko-,
+Schutz-, Reconciliation-, Audit-, Datenqualitäts- oder Paritätsfunktionen nicht
+entfernen.

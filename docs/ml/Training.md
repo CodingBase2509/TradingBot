@@ -23,9 +23,8 @@ Das Modell bewertet historische Alternativen anhand ihres Nettoergebnisses in
 `R`. Nur Alternativen mit einem erwarteten Netto-Risk-to-Reward von mindestens
 `1:1` sind zulässig.
 
-ADR-029 definiert Einstieg, Ausführungskosten, Ausgangsklassen,
-Netto-`R`-Begrenzung, aktive Haltedauer, P50/P90 und abgeschnittene
-Beobachtungen.
+Die verbindlichen Einstiegs-, Kosten-, Ausgangs-, Netto-`R`-, Haltedauer- und
+Censoring-Regeln stehen im [Backtesting](./Backtesting.md).
 
 ## Trainingsablauf
 
@@ -39,7 +38,8 @@ Rohdaten → Qualitätsprüfung → versionierter Datenstand
 Die isolierte Python-Umgebung wird als ein schlankes Paket mit den fünf
 Bereichen Contracts, Data, Research, Modeling und Jobs umgesetzt. Offizielle
 Abläufe verwenden bekannte CLI-Jobs und eine zusammenhängende versionierte
-Laufkonfiguration. ADR-030 legt die bewussten V1-Grenzen fest.
+Laufkonfiguration. Zusätzliche Dienste oder Schichten entstehen nur bei einem
+konkreten fachlichen oder gemessenen Bedarf.
 
 Originaldaten und kanonische Marktdaten bleiben von Features und Labels
 getrennt. Schnelle Forschungsstände dürfen temporär sein. Offizielle

@@ -53,8 +53,53 @@ gemeinsam mit den Marktfeatures vom Kandidatenmodell bewertet.
 Die Erzeugung muss in Training, Backtest und Laufzeit identisch und ohne
 zukünftige Informationen erfolgen.
 
-ADR-028 legt die kausale Swing-Erkennung, Zonenbildung, Strukturwerte,
-Puffer, Filter, Deduplizierung und V1-Kandidatenlimits fest.
+## Candidate Generator der V1
+
+Der Generator läuft nach jeder vollständig abgeschlossenen 5-Minuten-Kerze.
+Seine Startfenster umfassen 120 Ein-Minuten-, 288 Fünf-Minuten-, 192
+Fünfzehn-Minuten- und 120 Stundenkerzen. Swings werden kausal bestätigt: links
+und rechts gelten je drei Kerzen auf 1 und 5 Minuten sowie je zwei auf 15 und
+60 Minuten. Ein historischer Swing wird erst ab seiner damaligen Bestätigung
+verwendet.
+
+Strukturquellen sind bestätigte Swings, mehrfach berührte Zonen, aktuelles
+Sitzungs- und vorheriges Tageshoch/-tief, Handelsspannen, bestätigte Ausbruchs-
+und Rücklaufniveaus sowie Ausgangsbereiche starker Bewegungen. Nahe Niveaus
+werden innerhalb von `max(2 Ticks, 0,15 × 5-Minuten-ATR)` zu Zonen verbunden.
+
+```text
+structureScore =
+  reactionStrength      × 0,25
++ timeframeConfirmation × 0,25
++ recency               × 0,20
++ touches               × 0,20
++ relativeVolume        × 0,10
+```
+
+Long-Stops liegen unter, Short-Stops über passender Struktur. Der Startpuffer
+ist `max(2 Ticks, Spread in Ticks, 0,10 × 5-Minuten-ATR)`. Ziele verwenden die
+spiegelbildlich vor dem Einstieg liegenden Strukturen und bestätigte
+Bewegungsprojektionen. Rundung erfolgt immer konservativ auf gültige Ticks.
+ATR-basierte Niveaus sind nur als gekennzeichnete `VolatilityFallback`-Kandidaten
+zulässig.
+
+Je Richtung werden zunächst höchstens vier Stops mit vier Zielen kombiniert.
+Ungültige Seiten, Instrumentgrenzen, unzureichende Datenqualität, Marktrauschen
+und ein Netto-Risk-to-Reward unter `1:1` werden vor dem Modell verworfen.
+Redundante Kandidaten innerhalb derselben Zonentoleranz werden nach
+Strukturwert, Anzahl bestätigender Zeitrahmen, Aktualität, konservativerem Preis
+und stabilem technischem Tie-Breaker dedupliziert. Es bleiben höchstens zwölf
+Kandidaten je Richtung und 24 insgesamt.
+
+Jeder persistierte Kandidat erhält eine UUID Version 7 und zusätzlich einen
+deterministischen Fingerprint aus Generatorversion, Richtung, Preisen,
+Quelltypen und Parametern. Zielzeit sind 100 ms je Strategy-Entscheidung, die
+harte Startgrenze beträgt 500 ms. Eine Überschreitung erzeugt keine Order und
+setzt die Strategy auf `Degraded`; Wiederholungen führen zur Sperre.
+
+Lookbacks, Swingfenster, Toleranzen, Gewichte, Puffer, Limits und Laufzeitbudgets
+sind versionierte Startparameter. Änderungen werden nur auf Trainings- und
+Validierungsdaten gewählt und benötigen neue Golden- und Paritätstests.
 
 ## Spätere Erweiterungen
 

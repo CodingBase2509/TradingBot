@@ -13,15 +13,18 @@ Aus der Vision entsteht eine prüfbare, implementierbare Spezifikation.
 - [x] Backtest- und Kostenannahmen;
 - [x] Modellbewertung und Freigabeschwellen;
 - [ ] Anbieterentscheidungen;
-- [ ] Systemarchitektur und Modellvertrag.
+- [x] Systemarchitektur und Modellvertrag;
+- [x] Speicher-, Betriebs- und Umgebungsarchitektur;
+- [ ] V1-End-to-End-Abnahmeszenarien;
+- [ ] minimaler Technologie- und Konfigurationsvertrag.
 
 Die V1-Produktgrenzen und die Handels- und Risikopolitik sind mit ADR-005 und
 ADR-006 beschlossen. Parameter des technischen Designs bleiben konfigurierbar,
 ohne die fachliche Entscheidung erneut zu öffnen.
 
-Das V1-Lernziel, das Kandidatenraster und die historische Bewertungslogik sind
-mit ADR-007 beschlossen. Der konkrete Mindestvorteil gegenüber „kein Trade“
-wird als versionierter Modellparameter erst auf Validierungsdaten ausgewählt.
+Das V1-Lernziel, adaptive Kandidaten und die historische Bewertungslogik sind
+beschlossen. Der konkrete Mindestvorteil gegenüber „kein Trade“ wird als
+versionierter Modellparameter erst auf Validierungsdaten ausgewählt.
 
 Marktdatenauflösung, MES-Historie, Rollover, Lückentoleranz und das
 Backtest-Kostenmodell sind mit ADR-008 bis ADR-011 beschlossen. Konkrete
@@ -37,4 +40,6 @@ Alle offenen Punkte mit Einfluss auf Datenbeschaffung oder Kerndesign sind besch
 
 ## Nächstes zentrales Ergebnis
 
-Ein V1-Fachkonzept beschreibt konkrete Szenarien vom bekannten Datenstand über Modellentscheidung und Risikoprüfung bis zu Order, Positionsende und identischer Backtestsimulation.
+Konkrete V1-End-to-End-Abnahmeszenarien beschreiben den Weg vom bekannten
+Datenstand über Modellentscheidung und Risikoprüfung bis zu Order,
+Positionsende, Neustart und identischer Backtestsimulation.

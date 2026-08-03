@@ -27,9 +27,27 @@ Tagesrisiko nicht vervielfachen.
 
 Der Account Risk Coordinator reserviert Risikobetrag, parallelen Tradeplatz,
 tägliches Trade-Token und Instrumentrichtung atomar, bevor eine Order gesendet
-werden darf. Reservierungen mit unklarem Brokerstatus bleiben gebunden. Die
-vollständigen Regeln stehen in
-[ADR-025](../decisions/ADR-025-Atomic-Account-Risk-Reservations.md).
+werden darf. Dabei müssen Risiko offener Trades, freigegebener noch nicht
+abgeschlossener Orders und der neuen Absicht gemeinsam innerhalb des Limits
+bleiben.
+
+Reservierungen durchlaufen `Requested`, `Rejected`, `Reserved`,
+`PartiallyConsumed`, `Consumed`, `Released`, `Expired` oder `Unknown`.
+`Unknown` bleibt vollständig gebunden. Die Freigabe ist vor dem Senden nur kurz
+und konfigurierbar gültig; unmittelbar davor werden Preis, Stop, Kosten,
+Kontostand, globale Sperren sowie Broker- und Datenzustand erneut geprüft.
+
+Bei Teilfüllung wandert der gefüllte Anteil in das gebundene Positionsrisiko,
+der offene Anteil bleibt reserviert. `CancelRequested`, Timeout oder fehlende
+Antwort reichen nicht zur Freigabe. Ursprüngliches Stop-Risiko bleibt für die
+offene Menge konservativ gebunden und sinkt nicht durch unrealisierte Gewinne.
+Trade-Token wird erst mit der ersten Füllung endgültig verbraucht.
+
+Nach einem Neustart bleiben alle Reservierungen erhalten. Neue Trades sind
+blockiert, bis Orders, Fills, Positionen, Risikobeträge, Plätze, Tokens und
+Richtung mit dem Broker abgeglichen wurden. V1 benötigt dafür keinen
+verteilten Lock-Dienst; der Coordinator verarbeitet Entscheidungen je Konto
+geordnet und konsistent in PostgreSQL.
 
 ## Ein Trade wird blockiert, wenn
 
@@ -100,9 +118,10 @@ Ist dieser Schutz unklar, greift ein gesonderter Notfallablauf.
 Strategy-bezogene Fehler sperren nur die betroffene Instanz. Instrumentfehler
 sperren alle Instanzen dieses Instruments, Konto-/Brokerfehler alle ausführenden
 Instanzen des Kontos und plattformweite Fehler die gesamte betroffene
-Handelsumgebung. Offene Trades bleiben unter gemeinsamer Verwaltung. Details
-regelt
-[ADR-027](../decisions/ADR-027-Failure-Containment-And-Training-Isolation.md).
+Handelsumgebung. Offene Trades bleiben unter gemeinsamer Schutz-, Schließungs-
+und Abgleichverwaltung. Strategy-Neustarts sind begrenzt, setzen einen
+bekannten Brokerzustand voraus und heben eine manuell notwendige Freigabe nicht
+auf.
 
 Eine Position gilt erst als geschützt, wenn der Broker Stop Loss und Take Profit
 für die tatsächlich offene Richtung und Menge bestätigt hat. Fehlt dieser

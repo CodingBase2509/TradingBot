@@ -39,8 +39,8 @@ Laufzeit. Zwischen den Zonen bestehen keine gemeinsamen beschreibbaren
 Speicher oder Datenbanken. Rückflussdaten und Modellpakete passieren
 kontrollierte Export-, Quarantäne-, Prüf- und Freigabegrenzen.
 
-PostgreSQL und Parquet sind beschlossen. Konkrete Datei-/Objektablage, Secret
-Store und Hosting bleiben offen.
+PostgreSQL, Parquet und lokale zoneneigene Dateiablagen sind beschlossen. Der
+konkrete Cloudanbieter sowie spätere Hostpfade bleiben offen.
 
 MLflow bleibt auf die Trainingsumgebung begrenzt. Test und Produktion erhalten
 keinen direkten MLflow-Zugriff und laden ausschließlich durch die Plattform
@@ -59,11 +59,54 @@ Die lokale Speicherwurzel verwendet die fünf Bereiche `raw`, `market`,
 Partitionierung wird nur aufgrund gemessener Dateigröße oder Laufzeit
 eingeführt.
 
-Modellpakete werden manuell zwischen den Stufen kopiert. Der Model Manager
-scannt das zoneneigene Modellverzeichnis, prüft Pakete und registriert sie.
-Erst eine bewusste UI-Auswahl eines verfügbaren Pakets erzeugt eine
-versionierte Strategy Instance. Details regelt
-[ADR-034](../decisions/ADR-034-Deployment-Zones-And-Manual-Model-Promotion.md).
+## Zonen und Container
+
+Entwicklung findet lokal auf dem PC statt. Training und Test laufen zwar auf
+demselben Home-Server, verwenden aber getrennte Containergruppen, Netzwerke,
+PostgreSQL-Zugänge, Volumes, Hostpfade, Secrets, Ports und Backupbereiche.
+Training besitzt keine Brokerzugänge; Test kann weder MLflow noch
+Trainingsspeicher oder Databento-Secrets erreichen. Live läuft später auf einem
+dedizierten Cloud-Server und enthält weder Python, MLflow, Databento-Import,
+Notebooks noch Trainingsdaten.
+
+`trading-research` enthält Python-Paket, CLI und MLflow-Abhängigkeiten.
+`trading-platform` enthält .NET-Backend und gebautes Angular-Frontend.
+PostgreSQL und IB Gateway verwenden fest versionierte Standardimages oder
+gleichwertig gekapselte Installationen. Images verwenden feste Versionen oder
+Digests statt `latest`.
+
+## Manuelle Modellpromotion
+
+Test und Live besitzen jeweils ein eigenes Modellverzeichnis:
+
+```text
+models/
+├── .incoming/
+└── available/
+    └── pkg-<uuid-v7>/
+```
+
+Pakete werden manuell zuerst vollständig nach `.incoming` kopiert und danach
+atomar nach `available` verschoben. Der Model Manager scannt wiederholbar,
+prüft das unveränderte Paket und registriert es als `Discovered`, `Validating`,
+`Available`, `Invalid` oder `Incompatible`. Gleiche Paket-ID mit abweichender
+Prüfsumme ist ein kritischer Konflikt.
+
+Nur `Available` erscheint in der UI. Erst die bewusste Auswahl von Paket,
+Instrument, Datenquelle, Zeitrahmen, Candidate-/Feature-Konfiguration,
+Ausführungsmodus, Risikoprofil und Schwelle erzeugt eine versionierte Strategy
+Instance. Entdeckung oder Registrierung aktiviert niemals selbstständig
+Trading.
+
+```text
+Training → manuelle Kopie nach Test → Shadow/Paper-Prüfung
+→ exakt dasselbe Paket manuell nach Live → eigene Livefreigabe
+```
+
+Paket-ID und Prüfsummen bleiben zwischen den Stufen identisch. Eine
+Testfreigabe ist keine Livefreigabe. Paper- und spätere Live-Daten fließen nur
+als unveränderliche, manuell kopierte Exporte mit Manifest und Prüfsumme zurück
+in die Trainingszone.
 
 ## Betriebsgrundsätze
 
@@ -74,6 +117,13 @@ versionierte Strategy Instance. Details regelt
 - Backups und Wiederherstellung werden regelmäßig getestet.
 - Automatische Bereinigung darf nur ausdrücklich temporäre, reproduzierbare und
   nicht referenzierte Daten entfernen.
+- Secrets werden als Environment Variables an Container übergeben. Ihre Werte
+  liegen außerhalb von Git, Images, Build Arguments und normalen Logs in
+  hostgeschützten Dateien oder Runtime-Konfigurationen.
+- Backups werden ausschließlich vom jeweiligen Host gesteuert und durch
+  Wiederherstellungsproben geprüft.
+- Alle technischen Zeitpunkte verwenden UTC; Zeitsynchronisation und Drift
+  werden überwacht.
 
 ## Ausfallverhalten
 
@@ -88,10 +138,18 @@ PostgreSQL-, Zeit-, globaler Risiko- und Plattformzustandsfehler blockieren die
 gesamte betroffene Handelsumgebung. Die Anwendung bleibt für Schutz,
 Reconciliation, Wiederherstellung und Alarmierung möglichst aktiv.
 
+Strategy-bezogene Fehler stoppen nur die betroffene Instanz und erlauben nach
+Prüfung begrenzte Neustartversuche. Instrumentfehler stoppen alle zugehörigen
+Instanzen. Konto-, Broker-, Zeit-, PostgreSQL-, globaler Risiko- oder
+Plattformzustandsfehler stoppen alle betroffenen ausführenden Instanzen. Offene
+Positionen bleiben unter zentraler Schutz- und Abgleichverwaltung. Eine
+Wiederaufnahme erfolgt nie allein durch einen Prozessneustart, sondern erst
+nach erfolgreicher Zustandsprüfung und – wo erforderlich – manueller Freigabe.
+
 ## Noch festzulegen
 
-- lokale, Cloud- oder hybride Zielumgebung;
-- Hochverfügbarkeit und Wiederanlaufziele;
+- konkreter Cloudanbieter, Container Runtime und IB-Gateway-Betrieb;
+- Hochverfügbarkeit und konkrete Wiederanlaufziele;
 - Observability-Stack;
 - Zeitdienst und Zeitsynchronisation;
 - konkrete Backup-Frequenz und Wiederherstellungsziele;

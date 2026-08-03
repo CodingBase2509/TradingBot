@@ -31,6 +31,19 @@ Repräsentative Normal-, Volatilitäts-, Rollover- und Feiertagszeiträume erhal
 ergänzend MBP-1. Der Kauf erfolgt erst nach Qualitäts-, Lizenz- und
 Kostenfreigabe.
 
+Als dokumentierter Planungswert ergab die Databento-Schätzung für einen Monat
+MES vom 28. Juni bis 27. Juli 2026:
+
+| Schema | geschätzte Menge | geschätzter Preis |
+|---|---:|---:|
+| MBP-1 | etwa 13 GB | etwa 23 USD bei 1,80 USD/GB |
+| TBBO | etwa 450 KB | etwa 0,01 USD bei 28 USD/GB |
+| OHLCV-1m | etwa 280 KB | etwa 0,02 USD bei 70 USD/GB |
+
+Diese Werte sind keine dauerhafte Preisaussage und werden vor jedem Kauf neu
+im Anbieterportal geprüft. Sie begründen lediglich die vorläufige
+Kostenstrategie.
+
 Der anfängliche Datenumfang bleibt so klein und kostengünstig wie fachlich
 vertretbar. Zusätzliche Datenkäufe sind manuelle Entscheidungen. Spätere
 realisierte Handelsgewinne können nach gesonderter Freigabe teilweise in
@@ -70,7 +83,7 @@ gekennzeichnet und bei unklarer Stop-/TP-Reihenfolge konservativ bewertet.
 Der Datenfluss trennt Originaldaten, kanonische Marktdaten, temporäre oder
 eingefrorene Trainingsstände sowie Trainingsläufe und Modellpakete. Nur
 ausdrücklich reproduzierbare, nicht referenzierte temporäre Daten dürfen gemäß
-[ADR-020](../decisions/ADR-020-Data-Stages-And-Retention.md) bereinigt werden.
+[Speicher- und Datenhaltung](../architecture/Storage.md) bereinigt werden.
 
 Der versionierte CME-Börsenkalender ist die maßgebliche Quelle für Sitzungen,
 Feiertage und Sonderzeiten. IBKR-Angaben dienen als operative Gegenprüfung.

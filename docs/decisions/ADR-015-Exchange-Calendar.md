@@ -5,42 +5,23 @@
 
 ## Kontext
 
-Handelszeiten, Wartungspausen, Feiertage, verkürzte Sitzungen,
-Freitagsschließung und fachliche Handelstage müssen in Backtest, Paper Trading
-und späterem Betrieb identisch bestimmt werden. Lokale Uhrzeiten oder alleinige
-Brokerangaben reichen dafür nicht aus.
+Feste Uhrzeiten bilden Feiertage, verkürzte Sitzungen, Wartungspausen und Vertragsänderungen nicht zuverlässig ab.
 
 ## Entscheidung
 
-- Veröffentlichungen und Kalenderdaten der CME sind die fachlich maßgebliche
-  Quelle für MES-Sitzungen, Feiertage, Wartungspausen und Sonderzeiten.
-- Zeiten werden intern als UTC gespeichert. Die originale Börsenzeitzone und
-  der fachliche CME-Handelstag bleiben zusätzlich erhalten.
-- Eingelesene Kalenderstände werden versioniert und nachträglich nicht
-  überschrieben.
-- Jeder Backtest und Trainingsstand verweist auf die verwendete
-  Kalenderversion.
-- Interactive-Brokers-Vertrags- und Handelszeitangaben werden operativ als
-  Gegenprüfung verwendet.
-- Widersprechen IBKR und der freigegebene CME-Kalender einander, werden neue
-  Trades blockiert und die Abweichung geprüft.
-- Sondermeldungen und kurzfristige Börsenänderungen erzeugen eine neue
-  Kalenderversion.
-- Handelsgrenzen wie Einstiegsschluss und Freitagsschließung werden relativ zu
-  den Sitzungsgrenzen berechnet, nicht als feste deutsche Uhrzeit.
+- Ein versionierter offizieller CME-Kalender ist die fachliche Quelle für Handelstage und Sitzungsgrenzen.
+- IBKR dient im Betrieb als Gegenprüfung, überschreibt aber nicht stillschweigend die Version des Fachkalenders.
+- Alle Einstiegs- und Freitagsschlusszeiten werden relativ zu diesem Kalender berechnet.
 
 ## Begründung
 
-Die Börse definiert, wann ihr Produkt handelbar ist. Versionierung verhindert,
-dass spätere Kalenderkorrekturen historische Ergebnisse unbemerkt verändern.
-Der Brokervergleich erkennt operative Abweichungen, ohne brokerabhängige Angaben
-zur fachlichen Wahrheit zu machen.
+Ein versionierter Kalender hält Backtest und Laufzeit deterministisch und behandelt Sondertage korrekt.
 
 ## Folgen
 
-- Ein Kalenderimport und eine Validierung gegen IBKR werden benötigt.
-- Sommerzeitwechsel werden über Zeitzonendaten statt manuell berechneter
-  Zeitverschiebungen behandelt.
-- Unbekannte oder widersprüchliche Sitzungszustände führen zu „kein Trade“.
-- Anbieter, Format, Aktualisierungsintervall und technische Speicherung des
-  CME-Kalenders werden im technischen Design festgelegt.
+- Kalenderabweichungen blockieren im Zweifel neue Trades.
+
+## Verbindliche Dokumentation
+
+- [MarketData](../trading/MarketData.md)
+- [Execution](../trading/Execution.md)
