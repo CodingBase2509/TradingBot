@@ -14,6 +14,12 @@
 | Model Management | Modellpakete, Freigaben, Aktivierung und Rollback verwalten |
 | Operations & Audit | Systemzustand, Not-Aus, Monitoring, Audit und API-Status |
 
+Keines dieser Module darf MES als technischen Sonderfall voraussetzen. Das
+Market-Modul löst die interne `InstrumentId` in datenquellen- und
+brokerspezifische Symbole beziehungsweise Verträge auf. Risk Guard, Decision,
+Trade Management und Execution arbeiten anschließend mit dem gemeinsamen
+Instrumentvertrag und seinen Fähigkeiten.
+
 Backtest, Shadow und Paper verwenden diese Module gemeinsam. Austauschbar sind
 nur Uhr, Marktdatenquelle und Ausführungsadapter. Fachliche Abhängigkeiten
 laufen vom Markt über Entscheidung und Risiko zur Ausführung; Broker- und

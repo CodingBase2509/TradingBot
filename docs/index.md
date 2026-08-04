@@ -57,6 +57,10 @@ Roadmap       = Reihenfolge und Abnahme der Umsetzung
    Speicherarten, Datenstufen, Git-Grenzen und Aufbewahrung.
 5. [Deployment und Betrieb](./architecture/Deployment.md)
    Geplantes Startbild, Betriebsgrundsätze und Ausfallverhalten.
+6. [Technologie-Baseline](./architecture/TechnologyStack.md)
+   Beschlossene Plattformversionen, Versionsregeln und offene Bibliotheksauswahl.
+7. [Konfigurationsvertrag](./architecture/Configuration.md)
+   Typisierte Konfigurationen, Tabellen, Versionierung und Aktivierungsregeln.
 
 ## Trading
 
@@ -92,6 +96,8 @@ Roadmap       = Reihenfolge und Abnahme der Umsetzung
    Daten, Backtest, Risiko, Paper Broker und minimales Dashboard.
 4. [Phase 2 – Erstes lernendes Modell](./roadmap/Phase2.md)  
    Reproduzierbares Training, ONNX-Export und Shadow Mode.
+5. [V1-End-to-End-Abnahmeszenarien](./roadmap/V1AcceptanceScenarios.md)
+   Verbindliche fachliche Abläufe und Nachweise für den Plattformkern.
 
 Die späteren Phasen 3 bis 7 sind derzeit in der
 [Roadmap-Übersicht](./roadmap/Overview.md) beschrieben und besitzen noch keine
@@ -167,6 +173,14 @@ eigenen Dokumente.
     **Beschlossen:** Fünf Paketdateien, 500 Referenzfälle und fachlich exakte Python-/NET-Prüfung.
 34. [ADR-034 – Deploymentzonen und manuelle Modellpromotion](./decisions/ADR-034-Deployment-Zones-And-Manual-Model-Promotion.md)
     **Beschlossen:** Zwei Images, isolierte Zonen und bewusste Paketpromotion über die UI.
+35. [ADR-035 – Technologie-Baseline](./decisions/ADR-035-Technology-Baseline.md)
+    **Beschlossen mit offenen Details:** Hauptversionen und reproduzierbare Versionsführung.
+36. [ADR-036 – Versionierte und typisierte Konfiguration](./decisions/ADR-036-Versioned-Typed-Configuration.md)
+    **Beschlossen:** Eigene Verträge und Tabellen je fachlichem Konfigurationstyp.
+37. [ADR-037 – Instrumentneutraler Plattformkern](./decisions/ADR-037-Instrument-Agnostic-Platform-Core.md)
+    **Beschlossen:** MES als V1-Profil auf einem allgemein nutzbaren Instrumentvertrag.
+38. [ADR-038 – Parquet- und DataFrame-Bibliotheken](./decisions/ADR-038-Parquet-And-DataFrame-Libraries.md)
+    **Beschlossen:** PyArrow und pandas in Python, Parquet.Net und typisierte Verarbeitung in .NET.
 
 ## Empfohlene Lesereihenfolge
 

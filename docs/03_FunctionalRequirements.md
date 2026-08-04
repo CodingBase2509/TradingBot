@@ -2,6 +2,8 @@
 
 ## Marktdaten
 
+- beliebige vollständig konfigurierte und von Datenquelle sowie Broker
+  unterstützte Instrumente über denselben Plattformkern verarbeiten;
 - Historische und aktuelle Marktdaten anbinden, vereinheitlichen und speichern.
 - Datenlücken, Duplikate, veraltete Zeitstempel und unplausible Werte erkennen.
 - rekonstruierbare, tolerierbare und entscheidungsrelevante Datenlücken
@@ -28,6 +30,9 @@ Netto-Risk-to-Reward von mindestens `1:1`.
 
 ## Handel und Positionen
 
+- Symbol, Instrumentart, Börse und Vertragsdetails ohne Codeänderung je
+  Strategy Instance auswählen, sofern passende Adapter und Stammdaten
+  vorhanden sind;
 - mehrere versionierte Strategy Instances mit eigener Markt-, Modell-,
   Zeitrahmen-, Schwellen-, Modus- und Risikokonfiguration betreiben;
 - mehrere Shadow- und Simulated-Paper-Instanzen parallel und vergleichbar
@@ -45,6 +50,9 @@ Netto-Risk-to-Reward von mindestens `1:1`.
 - Backtest, Paper und Live über denselben fachlichen Ausführungskern unterstützen.
 - Strategy Trades und Positionen eindeutig einer gemeinsamen
   Broker-Nettoposition zuordnen.
+
+MES-spezifische Mengen- und Richtungsgrenzen sind das erste V1-Profil und keine
+hart codierten Eigenschaften der Plattform.
 
 ## Risiko und Betrieb
 

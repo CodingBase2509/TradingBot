@@ -48,6 +48,8 @@ Jedes Experiment verweist eindeutig auf:
 ## Wartbarkeit
 
 - Klare Verantwortungsgrenzen und versionierte Schnittstellen.
+- Keine symbolbezogenen Sonderfälle im gemeinsamen Handelsweg; Instrumentdaten
+  und Anbieterzuordnungen stammen aus Konfiguration und Adaptern.
 - Der Start als modularer Monolith ist beschlossen; Dienste werden erst bei betrieblichem Nutzen getrennt.
 - Anbieteradapter werden isoliert getestet.
 - Fachbegriffe und Annahmen werden in der Dokumentation gepflegt.

@@ -33,6 +33,11 @@ ablehnen.
 | Modellausführung | ONNX direkt in .NET |
 | Sicherheit | feste, nicht vom Modell veränderbare Grenzen |
 
+Die beschlossenen Hauptversionen stehen in der
+[Technologie-Baseline](./architecture/TechnologyStack.md). Aufbau und
+Versionierung der Einstellungen beschreibt der
+[Konfigurationsvertrag](./architecture/Configuration.md).
+
 V1 soll zuerst beweisen, dass Daten, Modellentscheidungen, Risiko, Orders,
 Positionen und Wiederherstellung korrekt und reproduzierbar funktionieren.
 Profitabilität ist eine zu prüfende Hypothese und kein Versprechen.

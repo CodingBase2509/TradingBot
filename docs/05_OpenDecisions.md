@@ -10,6 +10,8 @@ fehlenden oder fehlerhaften Volumendaten festzulegen.
 
 ## Priorität C – Technik und Betrieb
 
+- PostgreSQL-Major-Version sowie exakte initiale Versionen von Npgsql,
+  PyArrow, pandas, Parquet.Net, Docker Engine und Compose Plugin festlegen;
 - konkreter Cloudanbieter, Container Runtime und IB-Gateway-Betriebsdetails;
 - praktische Bestätigung der beschlossenen Modellpaket-Toleranzen am ersten
   echten Modell;
@@ -24,11 +26,10 @@ fehlenden oder fehlerhaften Volumendaten festzulegen.
 
 ## Empfohlene Entscheidungsreihenfolge
 
-1. V1-End-to-End-Abnahmeszenarien festlegen.
-2. minimalen Technologie- und Konfigurationsvertrag festlegen.
-3. Rollover-Ersatzregel festlegen.
-4. Danach Phase 1 implementieren und Databento sowie Brokerdaten parallel
-   praktisch validieren.
+1. Phase 1 beginnen und die exakten initialen Paketversionen im Projekt fixieren.
+2. Parquet-Dateiprofil mit einem gemeinsamen Golden-Datensatz bestätigen.
+3. Databento und Brokerdaten während der Datenanbindung praktisch validieren.
+4. Rollover-Ersatzregel vor der Implementierung des Vertragswechsels festlegen.
 
 ## Entscheidungsformat
 

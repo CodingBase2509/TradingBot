@@ -30,6 +30,32 @@
 - **ONNX** ist das bevorzugte Übergabeformat für freigegebene Modelle.
 - **Angular** ist Bedien- und Beobachtungsebene ohne Handelslogik.
 
+## Instrumentneutraler Kern
+
+Der Plattformkern kennt kein fest eingebautes MES-Symbol. Er arbeitet mit einer
+stabilen `InstrumentId` und bezieht alle marktspezifischen Eigenschaften aus
+versionierten Stammdaten, Konfigurationen und Adaptern:
+
+```text
+InstrumentId
+→ Datenquellen-Symbol und Brokerkontrakt
+→ Börse, Kalender und Sitzungen
+→ Tickgröße, Tickwert, Multiplikator und Mindestmenge
+→ Kosten-, Rollover- und Handelsrichtlinien
+→ Strategy Instance
+```
+
+Ein Instrument ist handelbar, wenn Datenquelle und Broker es unterstützen und
+eine vollständige, validierte Instrumentkonfiguration vorhanden ist. Futures-
+spezifische Funktionen wie Kontraktablauf und Rollover werden als
+Instrumentfähigkeit modelliert; Instrumente ohne Ablauf verwenden diese
+Funktion nicht.
+
+MES ist ausschließlich das erste V1-Profil, mit dem dieser allgemeine Weg
+implementiert und abgenommen wird. Ein weiteres Symbol soll durch Stammdaten,
+Konfiguration und Zuordnung in den vorhandenen Adaptern ergänzt werden können,
+ohne Risiko-, Entscheidungs-, Order- oder Positionskern zu verändern.
+
 ## Umgebungen
 
 ```text

@@ -11,6 +11,7 @@
 | Exposure | Gesamte wirtschaftliche Abhängigkeit des Kontos von offenen Positionen. |
 | Feature | Für das Modell vorbereiteter Eingangswert, etwa relative Preisänderung oder Uhrzeit. |
 | Future | Standardisierter, zeitlich befristeter Börsenvertrag auf einen Basiswert. |
+| InstrumentId | Plattforminterne stabile Kennung eines handelbaren Instruments, unabhängig von Broker- und Datenanbietersymbolen. |
 | Label | Historische Lernvorlage, die beschreibt, welche Entscheidung als gut bewertet wurde. |
 | Leakage | Versehentliche Nutzung von Informationen aus der Zukunft beim Training oder Test. |
 | Long / Short | Position auf steigende beziehungsweise fallende Preise. |

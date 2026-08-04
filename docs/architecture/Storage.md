@@ -69,6 +69,12 @@ Die Trading-Plattform gliedert ihre Tabellen fachlich in:
 | `execution` | Orders, Ausführungen und Brokerabgleiche |
 | `operations` | Systemzustände, Alarme, Not-Aus und Auditereignisse |
 
+Fachliche Konfigurationen werden nicht in einer allgemeinen Key-Value-Tabelle
+gesammelt. Platform Runtime, Account, Instrument, Strategy und Candidate
+Generator besitzen jeweils eigene versionierte Tabellen. Research Runs liegen
+in einer eigenen Tabelle der isolierten Trainingsdatenbank. Die genaue
+Zuordnung beschreibt der [Konfigurationsvertrag](./Configuration.md).
+
 MLflow verwendet in der Trainingszone eine eigene Datenbank und einen eigenen
 Dateibereich. Es ist keine Registry für Test- oder Produktionsfreigaben.
 
