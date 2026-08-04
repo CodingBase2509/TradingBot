@@ -34,6 +34,12 @@ Node.js 24 LTS und Python 3.14.6 aktuelle passende Produktlinien. Diese
 Versionsnummern dokumentieren den Planungszeitpunkt; Builds verwenden später
 die im Repository fixierten Versionen.
 
+Der erste Projektstand fixiert das .NET SDK auf `10.0.301`, die ASP.NET-
+OpenAPI-Integration auf `10.0.10` und die sicherheitsbereinigte transitive
+Microsoft.OpenApi-Version auf `2.7.5`. Das Python-Grundprojekt zielt auf
+CPython `3.14.x` und fixiert zunächst pandas `3.0.3`, PyArrow `25.0.0`, pytest
+`9.1.1`, Ruff `0.16.1` sowie pip `26.1.2`.
+
 ## Versionsregeln
 
 - Produktions- und reproduzierbare Testbuilds verwenden keine floating Tags
@@ -101,6 +107,6 @@ aber nicht erneut die grundsätzliche Bibliotheksauswahl.
 ## Noch zu fixieren
 
 - PostgreSQL-Major-Version und exakte Npgsql-Patchversion;
-- konkrete PyArrow-, pandas- und Parquet.Net-Patchversion beim Projektstart;
+- Parquet.Net-Patchversion bei der ersten .NET-Parquet-Implementierung;
 - exakte Docker-Engine- und Compose-Plugin-Version der Zielhosts;
 - CPU- oder später GPU-Variante von ONNX Runtime anhand des ersten Modells.

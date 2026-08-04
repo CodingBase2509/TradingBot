@@ -1,0 +1,64 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Tests and coverage
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+junit.xml
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local data, research output and MLflow state
+/data/
+/artifacts/
+/datasets/
+/models/
+/mlruns/
+/temp/
+
+# Local configuration, credentials and secrets
+.env
+.env.*
+!.env.example
+*.local.json
+*.local.toml
+
+# IDEs and editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+*.code-workspace
+
+# Logs and operating system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Keep project and dependency definitions in Git
+!pyproject.toml
+!pylock.toml
+!requirements*.txt

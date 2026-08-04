@@ -1,0 +1,1 @@
+"""Shared, versioned data contracts."""
