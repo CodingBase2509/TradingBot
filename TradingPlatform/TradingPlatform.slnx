@@ -1,3 +1,22 @@
 <Solution>
-  <Project Path="TradingPlatform/TradingPlatform.csproj" />
+  <Folder Name="/src/">
+    <Project Path="TradingPlatform.Platform/TradingPlatform.Platform.csproj" />
+    <Project Path="TradingPlatform/TradingPlatform.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="TradingPlatform.Decision/TradingPlatform.Decision.csproj" />
+    <Project Path="TradingPlatform.Execution/TradingPlatform.Execution.csproj" />
+    <Project Path="TradingPlatform.FeatureIntelligence/TradingPlatform.FeatureIntelligence.csproj" />
+    <Project Path="TradingPlatform.Market/TradingPlatform.Market.csproj" />
+    <Project Path="TradingPlatform.ModelManagement/TradingPlatform.ModelManagement.csproj" />
+    <Project Path="TradingPlatform.Operations/TradingPlatform.Operations.csproj" />
+    <Project Path="TradingPlatform.Reconciliation/TradingPlatform.Reconciliation.csproj" />
+    <Project Path="TradingPlatform.RiskGuard/TradingPlatform.RiskGuard.csproj" />
+    <Project Path="TradingPlatform.TradeManagement/TradingPlatform.TradeManagement.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="TradingPlatform.Tests.Integration/TradingPlatform.Tests.Integration.csproj" />
+    <Project Path="TradingPlatform.Tests.Unit/TradingPlatform.Tests.Unit.csproj" />
+    <Project Path="TradingPlatform.Tests/TradingPlatform.Tests.csproj" />
+  </Folder>
 </Solution>
