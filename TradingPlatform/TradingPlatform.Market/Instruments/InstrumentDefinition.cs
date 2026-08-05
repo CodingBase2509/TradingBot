@@ -1,10 +1,11 @@
+using TradingPlatform.Market.Instruments.Providers;
 using TradingPlatform.Platform.Identifiers;
 
 namespace TradingPlatform.Market.Instruments;
 
 public sealed record InstrumentDefinition
 {
-    public InstrumentDefinition(
+    internal InstrumentDefinition(
         InstrumentId id,
         string name,
         InstrumentType type,
@@ -13,7 +14,10 @@ public sealed record InstrumentDefinition
         decimal tickSize,
         decimal tickValue,
         decimal minimumQuantity,
-        InstrumentCapabilities capabilities)
+        InstrumentCapabilities capabilities,
+        IReadOnlyList<ProviderSymbol> providerSymbols,
+        Guid calendarId,
+        Guid? rolloverRuleId = null)
     {
         ArgumentNullException.ThrowIfNull(id);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
@@ -55,6 +59,36 @@ public sealed record InstrumentDefinition
                 nameof(capabilities));
         }
 
+        ArgumentNullException.ThrowIfNull(providerSymbols);
+        if (providerSymbols.Count == 0 || !providerSymbols.Any(IsValidMarketDataSymbol))
+        {
+            throw new ArgumentException("At least one valid market data symbol is required.", nameof(providerSymbols));
+        }
+
+        if (providerSymbols.Any(IsInvalidProviderSymbol) || HasDuplicateProviders(providerSymbols))
+        {
+            throw new ArgumentException("Provider symbols must be valid and unique per provider kind.", nameof(providerSymbols));
+        }
+
+        if (calendarId == Guid.Empty)
+        {
+            throw new ArgumentException("A calendar must be referenced.", nameof(calendarId));
+        }
+
+        if (capabilities.RequiresRollover && (!rolloverRuleId.HasValue || rolloverRuleId.Value == Guid.Empty))
+        {
+            throw new ArgumentException(
+                "A non-empty rollover rule must be specified when the instrument requires rollover.",
+                nameof(rolloverRuleId));
+        }
+
+        if (!capabilities.RequiresRollover && rolloverRuleId is not null)
+        {
+            throw new ArgumentException(
+                "A rollover rule must not be specified when rollover is disabled.",
+                nameof(rolloverRuleId));
+        }
+
         Id = id;
         Name = name;
         Type = type;
@@ -64,6 +98,9 @@ public sealed record InstrumentDefinition
         TickValue = tickValue;
         MinimumQuantity = minimumQuantity;
         Capabilities = capabilities;
+        ProviderSymbols = providerSymbols.ToArray();
+        CalendarId = calendarId;
+        RolloverRuleId = rolloverRuleId;
     }
 
     public InstrumentId Id { get; }
@@ -83,4 +120,30 @@ public sealed record InstrumentDefinition
     public decimal MinimumQuantity { get; }
 
     public InstrumentCapabilities Capabilities { get; }
+
+    public IReadOnlyList<ProviderSymbol> ProviderSymbols { get; }
+
+    public Guid CalendarId { get; }
+
+    public Guid? RolloverRuleId { get; }
+
+    private static bool IsValidMarketDataSymbol(ProviderSymbol providerSymbol) =>
+        providerSymbol is not null &&
+        providerSymbol.Kind is ProviderKind.MarketData &&
+        !string.IsNullOrWhiteSpace(providerSymbol.Provider) &&
+        !string.IsNullOrWhiteSpace(providerSymbol.Symbol);
+
+    private static bool IsInvalidProviderSymbol(ProviderSymbol providerSymbol) =>
+        providerSymbol is null ||
+        providerSymbol.Kind is ProviderKind.Unknown ||
+        !Enum.IsDefined(providerSymbol.Kind) ||
+        string.IsNullOrWhiteSpace(providerSymbol.Provider) ||
+        string.IsNullOrWhiteSpace(providerSymbol.Symbol);
+
+    private static bool HasDuplicateProviders(IEnumerable<ProviderSymbol> providerSymbols)
+    {
+        var providerKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        return providerSymbols.Any(providerSymbol =>
+            !providerKeys.Add($"{(int)providerSymbol.Kind}:{providerSymbol.Provider}"));
+    }
 }

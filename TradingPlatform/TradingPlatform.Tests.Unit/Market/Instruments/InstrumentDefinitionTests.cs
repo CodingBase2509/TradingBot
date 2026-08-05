@@ -1,4 +1,5 @@
 using TradingPlatform.Market.Instruments;
+using TradingPlatform.Market.Instruments.Providers;
 using TradingPlatform.Platform.Identifiers;
 using TradingPlatform.Tests.Builders;
 
@@ -36,7 +37,10 @@ public sealed class InstrumentDefinitionTests
             tickSize: 1m,
             tickValue: 1m,
             minimumQuantity: 1m,
-            capabilities));
+            capabilities,
+            [new ProviderSymbol(ProviderKind.MarketData, "TestProvider", "TEST")],
+            Guid.NewGuid(),
+            Guid.NewGuid()));
 
         Assert.Equal("capabilities", exception.ParamName);
     }
@@ -57,7 +61,10 @@ public sealed class InstrumentDefinitionTests
             tickSize,
             mes.TickValue,
             mes.MinimumQuantity,
-            mes.Capabilities));
+            mes.Capabilities,
+            mes.ProviderSymbols,
+            mes.CalendarId,
+            mes.RolloverRuleId));
 
         Assert.Equal("tickSize", exception.ParamName);
     }
