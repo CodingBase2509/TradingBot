@@ -3,9 +3,9 @@ using TradingPlatform.Platform.Identifiers;
 
 namespace TradingPlatform.Market.Instruments;
 
-public sealed record InstrumentDefinition
+public sealed record Instrument
 {
-    internal InstrumentDefinition(
+    internal Instrument(
         InstrumentId id,
         string name,
         InstrumentType type,

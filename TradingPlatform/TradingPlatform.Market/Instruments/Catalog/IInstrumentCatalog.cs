@@ -5,14 +5,14 @@ namespace TradingPlatform.Market.Instruments.Catalog;
 
 public interface IInstrumentCatalog
 {
-    Task<InstrumentDefinition?> GetAsync(
+    Task<Instrument?> GetAsync(
         InstrumentId id,
         CancellationToken cancellationToken = default);
 
-    Task<InstrumentDefinition?> GetAsync(
+    Task<Instrument?> GetAsync(
         ProviderSymbol symbol,
         CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<InstrumentDefinition>> GetAllAsync(
+    Task<IReadOnlyList<Instrument>> GetAllAsync(
         CancellationToken cancellationToken = default);
 }

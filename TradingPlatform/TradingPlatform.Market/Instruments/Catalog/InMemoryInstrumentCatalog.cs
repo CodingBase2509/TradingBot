@@ -5,16 +5,16 @@ namespace TradingPlatform.Market.Instruments.Catalog;
 
 internal sealed class InMemoryInstrumentCatalog : IInstrumentCatalog
 {
-    private readonly IReadOnlyList<InstrumentDefinition> _instruments;
-    private readonly Dictionary<InstrumentId, InstrumentDefinition> _instrumentsById = new();
-    private readonly Dictionary<ProviderSymbol, InstrumentDefinition> _instrumentsByProviderSymbol = new();
+    private readonly IReadOnlyList<Instrument> _instruments;
+    private readonly Dictionary<InstrumentId, Instrument> _instrumentsById = new();
+    private readonly Dictionary<ProviderSymbol, Instrument> _instrumentsByProviderSymbol = new();
 
     public InMemoryInstrumentCatalog()
         : this([])
     {
     }
 
-    public InMemoryInstrumentCatalog(IEnumerable<InstrumentDefinition> instruments)
+    public InMemoryInstrumentCatalog(IEnumerable<Instrument> instruments)
     {
         ArgumentNullException.ThrowIfNull(instruments);
 
@@ -47,7 +47,7 @@ internal sealed class InMemoryInstrumentCatalog : IInstrumentCatalog
         _instruments = Array.AsReadOnly(snapshot);
     }
 
-    public Task<InstrumentDefinition?> GetAsync(
+    public Task<Instrument?> GetAsync(
         InstrumentId id,
         CancellationToken cancellationToken = default)
     {
@@ -58,7 +58,7 @@ internal sealed class InMemoryInstrumentCatalog : IInstrumentCatalog
         return Task.FromResult(instrument);
     }
 
-    public Task<InstrumentDefinition?> GetAsync(
+    public Task<Instrument?> GetAsync(
         ProviderSymbol symbol,
         CancellationToken cancellationToken = default)
     {
@@ -69,7 +69,7 @@ internal sealed class InMemoryInstrumentCatalog : IInstrumentCatalog
         return Task.FromResult(instrument);
     }
 
-    public Task<IReadOnlyList<InstrumentDefinition>> GetAllAsync(
+    public Task<IReadOnlyList<Instrument>> GetAllAsync(
         CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();

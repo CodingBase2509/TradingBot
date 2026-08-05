@@ -5,7 +5,7 @@ using TradingPlatform.Tests.Builders;
 
 namespace TradingPlatform.Tests.Unit.Market.Instruments;
 
-public sealed class InstrumentDefinitionTests
+public sealed class InstrumentTests
 {
     [Fact]
     public void MesProfileContainsTheExpectedTradingValues()
@@ -28,7 +28,7 @@ public sealed class InstrumentDefinitionTests
             HasExpiringContracts: false,
             RequiresRollover: true);
 
-        var exception = Assert.Throws<ArgumentException>(() => new InstrumentDefinition(
+        var exception = Assert.Throws<ArgumentException>(() => new Instrument(
             new InstrumentId("TEST"),
             "Test instrument",
             InstrumentType.Future,
@@ -52,7 +52,7 @@ public sealed class InstrumentDefinitionTests
     {
         var mes = TestInstruments.Mes();
 
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new InstrumentDefinition(
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new Instrument(
             mes.Id,
             mes.Name,
             mes.Type,

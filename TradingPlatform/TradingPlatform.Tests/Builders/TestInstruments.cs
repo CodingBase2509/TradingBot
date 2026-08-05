@@ -10,7 +10,7 @@ public static class TestInstruments
 
     public static Guid MesRolloverRuleId { get; } = Guid.Parse("22222222-2222-7222-8222-222222222222");
 
-    public static InstrumentDefinition Mes() => new(
+    public static Instrument Mes() => new(
         new InstrumentId("MES"),
         "Micro E-mini S&P 500 Future",
         InstrumentType.Future,

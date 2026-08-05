@@ -44,14 +44,14 @@ public sealed class InMemoryInstrumentCatalogTests
     [Fact]
     public async Task CatalogUsesAnImmutableSnapshotOfTheSource()
     {
-        var source = new List<InstrumentDefinition> { TestInstruments.Mes() };
+        var source = new List<Instrument> { TestInstruments.Mes() };
         var catalog = new InMemoryInstrumentCatalog(source);
 
         source.Clear();
         var instruments = await catalog.GetAllAsync();
 
         Assert.Single(instruments);
-        Assert.IsNotType<List<InstrumentDefinition>>(instruments);
+        Assert.IsNotType<List<Instrument>>(instruments);
     }
 
     [Fact]
@@ -88,7 +88,7 @@ public sealed class InMemoryInstrumentCatalogTests
             () => catalog.GetAllAsync(cancellationToken));
     }
 
-    private static InstrumentDefinition CreateInstrument(string id, string symbol) => new(
+    private static Instrument CreateInstrument(string id, string symbol) => new(
         new InstrumentId(id),
         id,
         InstrumentType.Equity,

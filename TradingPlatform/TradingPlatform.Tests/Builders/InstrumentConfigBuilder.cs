@@ -10,7 +10,7 @@ internal sealed class InstrumentConfigBuilder
 {
     private const string ContentHash = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
-    private ConfigVersionMetadata? _metadata;
+    private ConfigVersionMetadata? _metadata = CreateMetadata(ConfigStatus.Active);
     private InstrumentId? _instrumentId = new("MES");
     private string _name = "Micro E-mini S&P 500 Future";
     private InstrumentType _instrumentType = InstrumentType.Future;
@@ -108,7 +108,7 @@ internal sealed class InstrumentConfigBuilder
 
     public InstrumentConfig Build() => new()
     {
-        Metadata = _metadata ?? CreateMetadata(ConfigStatus.Active),
+        Metadata = _metadata!,
         InstrumentId = _instrumentId!,
         Name = _name,
         InstrumentType = _instrumentType,

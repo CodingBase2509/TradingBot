@@ -3,9 +3,9 @@ using TradingPlatform.Platform.Config;
 
 namespace TradingPlatform.Market.Instruments;
 
-internal static class InstrumentDefinitionFactory
+internal static class InstrumentFactory
 {
-    public static InstrumentDefinition CreateDefinition(InstrumentConfig config)
+    public static Instrument Create(InstrumentConfig config)
     {
         ArgumentNullException.ThrowIfNull(config);
 
@@ -18,7 +18,7 @@ internal static class InstrumentDefinitionFactory
 
         if (config.Metadata.Status is not ConfigStatus.Active)
         {
-            throw new InvalidOperationException("Only an active instrument config can create a runtime definition.");
+            throw new InvalidOperationException("Only an active instrument config can create a runtime instrument.");
         }
 
         var calendarId = Guid.Parse(config.CalendarId!);
@@ -26,7 +26,7 @@ internal static class InstrumentDefinitionFactory
             ? null
             : Guid.Parse(config.RolloverRuleId);
 
-        return new InstrumentDefinition(
+        return new Instrument(
             config.InstrumentId,
             config.Name,
             config.InstrumentType,
