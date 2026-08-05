@@ -1,5 +1,9 @@
 # Komponenten
 
+Diese Seite beschreibt die logischen Komponenten. Die verbindliche Zuordnung
+zu konkreten .NET-Projekten, Abhängigkeitsregeln und Besitz von Zuständen steht
+in der [.NET-Solution- und Projektarchitektur](./SolutionStructure.md).
+
 ## .NET-Plattform
 
 | Modul | Verantwortung |
@@ -50,9 +54,10 @@ Positionen werden aus bestätigten Ausführungen berechnet und mit der
 Broker-Nettoposition abgeglichen. Unbekannte oder unmögliche Übergänge blockieren
 den kleinsten sicheren Bereich.
 
-Die neun Module werden in V1 als Ordner und Namespaces eines ausführbaren
-.NET-Plattformprojekts umgesetzt. Sie sind keine neun Dienste oder
-zwangsläufig neun Assemblies.
+Die neun Module werden in V1 als eigene Projekte und Assemblies eines gemeinsam
+ausgelieferten modularen .NET-Monolithen umgesetzt. Sie sind keine neun Dienste.
+Ein kleiner Shared Kernel enthält nur tatsächlich modulübergreifende stabile
+Typen; der ASP.NET-Core-Host registriert alle Module als Composition Root.
 
 ## Python-Forschung
 
@@ -132,11 +137,13 @@ Die verbindliche Speicherzuordnung und Aufbewahrung beschreibt
 
 ## Physische Codegrenzen
 
-V1 startet mit einer .NET-Solution, einem ausführbaren Plattformprojekt und
-einem kompakten Testprojekt. Infrastruktur wird nah an ihrer fachlichen Grenze
-gehalten; EF Core wird ohne generische Repository- oder Unit-of-Work-Hülle
-verwendet. Python startet als ein installierbares Paket mit den fünf genannten
-Bereichen.
+V1 verwendet eine .NET-Solution mit einem ausführbaren Host, einem kleinen
+Shared Kernel, neun fachlichen Modulprojekten, einer gemeinsamen Testbibliothek
+sowie getrennten Unit- und Integrationstestprojekten. Alle Produktionsprojekte
+werden gemeinsam als ein modularer Monolith ausgeliefert. Infrastruktur wird
+nah an ihrer fachlichen Grenze gehalten; EF Core wird ohne generische
+Repository- oder Unit-of-Work-Hülle verwendet. Python startet als ein
+installierbares Paket mit den fünf genannten Bereichen.
 
 Weitere Services, Assemblies, Frameworkschichten und allgemeine Abstraktionen
 entstehen nur für einen realen zweiten Anwendungsfall, eine notwendige

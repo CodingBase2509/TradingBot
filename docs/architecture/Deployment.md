@@ -49,9 +49,10 @@ geprüfte Modellpakete.
 Training startet mit lokalen, reproduzierbaren CLI-Jobs. Forschungs-UI,
 verteilter Orchestrator und Job Queue gehören nicht zur V1.
 
-Auch die .NET-Plattform beginnt mit einer Solution, einem ausführbaren
-Plattformprojekt und einem kompakten Testprojekt. Zusätzliche Dienste,
-Assemblies und Frameworkschichten benötigen einen gemessenen oder
+Auch die .NET-Plattform bleibt eine gemeinsam ausgelieferte Anwendung. Der Host,
+der kleine Shared Kernel und die neun fachlichen Modulprojekte bilden einen
+modularen Monolithen und keine getrennten Dienste. Zusätzliche Schichtprojekte,
+Dienste und Frameworkschichten benötigen einen gemessenen oder
 sicherheitsrelevanten Nutzen.
 
 Die lokale Speicherwurzel verwendet die fünf Bereiche `raw`, `market`,

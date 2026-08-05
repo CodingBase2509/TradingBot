@@ -15,8 +15,9 @@ Beweisen, dass Daten, Simulation, Risiko und Orderzustände korrekt funktioniere
 - einfache feste Testlogik verwenden, bevor ein lernendes Modell integriert wird;
 - Paper-Broker und Risk Guard integrieren;
 - die neun Modulgrenzen und Trade-/Order-/Positionszustände implementieren;
-- die Module zunächst in einem schlanken ausführbaren Plattformprojekt durch
-  Namespaces und Architekturtests trennen;
+- die Module als eigene Projekte eines gemeinsam ausgelieferten modularen
+  Monolithen durch Projektverweise und bewusste öffentliche Schnittstellen
+  trennen;
 - typisierte und versionierte Platform-, Account-, Instrument-, Candidate-
   und Strategy-Konfigurationen mit eigenen Tabellen umsetzen;
 - StrategyInstanceId, gemeinsame Kontosicht und Execution Router im
@@ -38,4 +39,4 @@ insbesondere:
 - sichtbare Datenqualität und Warnungen;
 - maximal drei gleichgerichtete offene Paper-Trades und keine Position außerhalb
   der beschlossenen Handelsgrenzen.
-- Architekturtest gegen MES-Sonderfälle im gemeinsamen Plattformkern.
+- Tests des instrumentneutralen Plattformkerns gegen MES-Sonderfälle.

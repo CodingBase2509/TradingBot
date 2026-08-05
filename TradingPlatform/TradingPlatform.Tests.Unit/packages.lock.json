@@ -98,6 +98,37 @@
         "dependencies": {
           "xunit.extensibility.core": "[2.9.3]"
         }
+      },
+      "tradingplatform.market": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "[10.0.10, )",
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.platform": {
+        "type": "Project"
+      },
+      "tradingplatform.tests": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.Extensions.TimeProvider.Testing": "[10.8.0, )",
+          "TradingPlatform.Market": "[1.0.0, )",
+          "TradingPlatform.Platform": "[1.0.0, )",
+          "xunit": "[2.9.3, )"
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "CentralTransitive",
+        "requested": "[10.0.10, )",
+        "resolved": "10.0.10",
+        "contentHash": "z/2xXlFw2aLGjHyEm6E0tQ+In6VfzQzTrtArbQ2c0TQE16ZbyDCMGPvaUT9I0s8rgy9sRWlU2P9waW37qV04qA=="
+      },
+      "Microsoft.Extensions.TimeProvider.Testing": {
+        "type": "CentralTransitive",
+        "requested": "[10.8.0, )",
+        "resolved": "10.8.0",
+        "contentHash": "xXcxGfXSO/8o7IfYK36r3eZTl9RMKAl5K6x3x6o/QQBolI0t8vsLIGmhc3HJBTd11u1uPLHz61VnOTSTmY7ZVA=="
       }
     }
   }

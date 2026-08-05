@@ -11,6 +11,63 @@
           "Microsoft.OpenApi": "2.0.0"
         }
       },
+      "tradingplatform.decision": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.execution": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.featureintelligence": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.market": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.modelmanagement": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.operations": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.platform": {
+        "type": "Project"
+      },
+      "tradingplatform.reconciliation": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.riskguard": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
+      "tradingplatform.trademanagement": {
+        "type": "Project",
+        "dependencies": {
+          "TradingPlatform.Platform": "[1.0.0, )"
+        }
+      },
       "Microsoft.OpenApi": {
         "type": "CentralTransitive",
         "requested": "[2.7.5, )",

@@ -2,9 +2,9 @@
 
 Vollständige Navigation durch die Projektdokumentation.
 
-**Stand:** 3. August 2026
-**Aktuelle Phase:** Phase 0 – Planung und fachliche Spezifikation  
-**Implementierungsstatus:** Noch keine produktive Implementierung
+**Stand:** 4. August 2026
+**Aktuelle Phase:** Phase 1 – Deterministischer Plattformkern
+**Implementierungsstatus:** .NET-Grundstruktur und erster Instrumentvertrag implementiert
 
 Eine kurze Einführung in das Projekt bietet die
 [Startseite der Dokumentation](./README.md).
@@ -51,15 +51,17 @@ Roadmap       = Reihenfolge und Abnahme der Umsetzung
    Logische Ebenen, Verantwortungsgrenzen und zentrale Datenflüsse.
 2. [Komponenten](./architecture/Components.md)  
    Verantwortlichkeiten der .NET-, Python- und Angular-Komponenten.
-3. [Kommunikation](./architecture/Communication.md)  
+3. [.NET-Solution- und Projektarchitektur](./architecture/SolutionStructure.md)
+   Physische Projekte, Abhängigkeitsregeln und funktionale Besitzgrenzen.
+4. [Kommunikation](./architecture/Communication.md)
    Schnittstellen, Kommunikationswege und Modellvertrag.
-4. [Speicher und Datenhaltung](./architecture/Storage.md)
+5. [Speicher und Datenhaltung](./architecture/Storage.md)
    Speicherarten, Datenstufen, Git-Grenzen und Aufbewahrung.
-5. [Deployment und Betrieb](./architecture/Deployment.md)
+6. [Deployment und Betrieb](./architecture/Deployment.md)
    Geplantes Startbild, Betriebsgrundsätze und Ausfallverhalten.
-6. [Technologie-Baseline](./architecture/TechnologyStack.md)
+7. [Technologie-Baseline](./architecture/TechnologyStack.md)
    Beschlossene Plattformversionen, Versionsregeln und offene Bibliotheksauswahl.
-7. [Konfigurationsvertrag](./architecture/Configuration.md)
+8. [Konfigurationsvertrag](./architecture/Configuration.md)
    Typisierte Konfigurationen, Tabellen, Versionierung und Aktivierungsregeln.
 
 ## Trading
@@ -166,7 +168,7 @@ eigenen Dokumente.
 30. [ADR-030 – Schlanke Python-Forschungsarchitektur](./decisions/ADR-030-Lean-Python-Research-Architecture.md)
     **Beschlossen:** Ein Paket, fünf Bereiche, ein CLI und keine künstliche Infrastruktur.
 31. [ADR-031 – Schlanke .NET-Plattformstruktur](./decisions/ADR-031-Lean-DotNet-Platform-Structure.md)
-    **Beschlossen:** Ein Host, wenige Projekte und fachliche Modulgrenzen ohne Frameworkballast.
+    **Ersetzt:** Ursprünglicher Start mit einem Plattformprojekt; ersetzt durch ADR-039.
 32. [ADR-032 – Einfacher und vollständiger Code](./decisions/ADR-032-Simple-And-Complete-Code.md)
     **Beschlossen:** Verständliche Python- und C#-Implementierungen ohne Funktionsverlust.
 33. [ADR-033 – Modellpaket-Schemas und Parität](./decisions/ADR-033-Model-Package-Schemas-And-Parity.md)
@@ -181,6 +183,8 @@ eigenen Dokumente.
     **Beschlossen:** MES als V1-Profil auf einem allgemein nutzbaren Instrumentvertrag.
 38. [ADR-038 – Parquet- und DataFrame-Bibliotheken](./decisions/ADR-038-Parquet-And-DataFrame-Libraries.md)
     **Beschlossen:** PyArrow und pandas in Python, Parquet.Net und typisierte Verarbeitung in .NET.
+39. [ADR-039 – Projektbasierter modularer .NET-Monolith](./decisions/ADR-039-Project-Based-Modular-Monolith.md)
+    **Beschlossen:** Ein Host, ein kleiner Shared Kernel, neun Modulprojekte und getrennte Testrollen.
 
 ## Empfohlene Lesereihenfolge
 

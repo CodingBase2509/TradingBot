@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
@@ -16,7 +13,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="Xunit"/>
+        <ProjectReference Include="..\TradingPlatform.Market\TradingPlatform.Market.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Platform\TradingPlatform.Platform.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Tests\TradingPlatform.Tests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
     </ItemGroup>
 
 </Project>

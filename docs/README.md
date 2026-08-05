@@ -1,7 +1,7 @@
 # Trading-KI-Plattform – Projektdokumentation
 
-**Stand:** 3. August 2026
-**Status:** Planung, noch keine Implementierung
+**Stand:** 4. August 2026
+**Status:** Phase 1, deterministischer Plattformkern begonnen
 
 ## Worum geht es?
 
@@ -23,7 +23,7 @@ ablehnen.
 
 | Bereich | Stand |
 |---|---|
-| Projektphase | Planung und fachliche Spezifikation |
+| Projektphase | Phase 1 – deterministischer Plattformkern |
 | V1-Markt | Micro E-mini S&P 500 Future (MES) |
 | V1-Betrieb | Paper Trading, kein Echtgeld |
 | Broker | Interactive Brokers |
@@ -37,6 +37,9 @@ Die beschlossenen Hauptversionen stehen in der
 [Technologie-Baseline](./architecture/TechnologyStack.md). Aufbau und
 Versionierung der Einstellungen beschreibt der
 [Konfigurationsvertrag](./architecture/Configuration.md).
+Die physische .NET-Struktur und die Verantwortung jedes Projekts legt die
+[.NET-Solution- und Projektarchitektur](./architecture/SolutionStructure.md)
+fest.
 
 V1 soll zuerst beweisen, dass Daten, Modellentscheidungen, Risiko, Orders,
 Positionen und Wiederherstellung korrekt und reproduzierbar funktionieren.

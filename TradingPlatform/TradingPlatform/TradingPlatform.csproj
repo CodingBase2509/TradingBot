@@ -1,9 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
@@ -12,9 +9,22 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <ProjectReference Include="..\TradingPlatform.Decision\TradingPlatform.Decision.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Execution\TradingPlatform.Execution.csproj" />
+        <ProjectReference Include="..\TradingPlatform.FeatureIntelligence\TradingPlatform.FeatureIntelligence.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Market\TradingPlatform.Market.csproj" />
+        <ProjectReference Include="..\TradingPlatform.ModelManagement\TradingPlatform.ModelManagement.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Operations\TradingPlatform.Operations.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Platform\TradingPlatform.Platform.csproj" />
+        <ProjectReference Include="..\TradingPlatform.Reconciliation\TradingPlatform.Reconciliation.csproj" />
+        <ProjectReference Include="..\TradingPlatform.RiskGuard\TradingPlatform.RiskGuard.csproj" />
+        <ProjectReference Include="..\TradingPlatform.TradeManagement\TradingPlatform.TradeManagement.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

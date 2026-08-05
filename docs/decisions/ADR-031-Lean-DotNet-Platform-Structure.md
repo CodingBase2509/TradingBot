@@ -1,6 +1,6 @@
 # ADR-031: Schlanke physische Struktur der .NET-Plattform
 
-- **Status:** beschlossen
+- **Status:** ersetzt durch [ADR-039](./ADR-039-Project-Based-Modular-Monolith.md)
 - **Datum:** 29. Juli 2026
 
 ## Kontext

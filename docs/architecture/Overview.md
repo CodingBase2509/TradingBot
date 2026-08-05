@@ -116,3 +116,9 @@ Rohdaten → geprüfter Trainingsstand → Training
 Für den Start ist ein modularer .NET-Monolith beschlossen. Klare Modulgrenzen
 bleiben erhalten, ohne frühzeitig den Betriebsaufwand verteilter Dienste
 einzuführen.
+
+Physisch besteht die Plattform aus einem ASP.NET-Core-Host, einem kleinen
+Shared Kernel, neun fachlichen Modulprojekten, einer gemeinsamen
+Testbibliothek sowie getrennten Unit- und Integrationstestprojekten. Die
+verbindliche Zuordnung aller Funktionen und Abhängigkeitsregeln beschreibt die
+[.NET-Solution- und Projektarchitektur](./SolutionStructure.md).
